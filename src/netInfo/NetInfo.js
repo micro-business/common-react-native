@@ -12,19 +12,15 @@ function* refreshStateAsync() {
     const isConnectionExpensive = yield call(NetInfo.isConnectionExpensive);
     const isConnected = yield call(NetInfo.isConnected.fetch);
 
-    yield put(
-      Actions.stateChanged(
-        Map({
-          netInfoExists: true,
-          connectionInfo: Map({
-            type: connectionInfo.type,
-            effectiveType: connectionInfo.effectiveType,
-          }),
-          isConnectionExpensive,
-          isConnected,
-        }),
-      ),
-    );
+    yield put(Actions.stateChanged(Map({
+      netInfoExists: true,
+      connectionInfo: Map({
+        type: connectionInfo.type,
+        effectiveType: connectionInfo.effectiveType,
+      }),
+      isConnectionExpensive,
+      isConnected,
+    })));
   } catch (exception) {
     yield put(Actions.stateChanged(Map({ netInfoExists: false })));
   }
