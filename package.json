@@ -1,6 +1,6 @@
 {
   "name": "micro-business-common-react-native",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "Micro Business Common React Native",
   "main": "./src/index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   "homepage": "https://bitbucket.org/microbusiness/micro-business-common-react-native#readme",
   "dependencies": {
     "immutable": "^4.0.0-rc.9",
-    "react-native": "^0.49.3",
+    "react-native": "^0.49.5",
     "redux-saga": "^0.16.0",
     "uuid": "^3.1.0"
   },
@@ -27,7 +27,7 @@
     "babel-jest": "^21.2.0",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
-    "eslint": "^4.9.0",
+    "eslint": "^4.10.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "6.0.2",
