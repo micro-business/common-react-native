@@ -1,19 +1,12 @@
 // @flow
 
+// TODO: Morteza: Move useracess actions and status to somewhere more generic, so we do not have to add ...parse-server-common.... as dependency
 import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
-import {
-  UserAccessStatus
-} from 'micro-business-parse-server-common-react-native';
-import React, {
-  Component
-} from 'react';
+import { UserAccessStatus } from 'micro-business-parse-server-common-react-native';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  bindActionCreators
-} from 'redux';
-import {
-  connect
-} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import SignUpSignIn from './SignUpSignIn';
 
 class UserSignInSignUpContainer extends Component {
@@ -33,23 +26,21 @@ class UserSignInSignUpContainer extends Component {
     this.props.userAccessActions.signUpWithUsernameAndPassword(emailAddress, password, emailAddress, 'individual');
   };
 
-  render = () => {
-    return (
-      <SignUpSignIn
-        onSignInWithFacebookClicked={this.onSignInWithFacebookClicked}
-        onSignInClicked={this.onSignInClicked}
-        onSignUpClicked={this.onSignUpClicked}
-        signUpOrSignInIsInProgress={
-          this.props.signInStatus === UserAccessStatus.IN_PROGRESS || this.props.signUpStatus === UserAccessStatus.IN_PROGRESS
-        }
-        title={this.props.title}
-      />
-    );
-  };
+  render = () => (
+    <SignUpSignIn
+      onSignInWithFacebookClicked={this.onSignInWithFacebookClicked}
+      onSignInClicked={this.onSignInClicked}
+      onSignUpClicked={this.onSignUpClicked}
+      signUpOrSignInIsInProgress={
+        this.props.signInStatus === UserAccessStatus.IN_PROGRESS || this.props.signUpStatus === UserAccessStatus.IN_PROGRESS
+      }
+      title={this.props.title}
+    />
+  );
 }
 
 UserSignInSignUpContainer.propTypes = {
-  userAccessActions: PropTypes.object.isRequired,
+  userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   signInStatus: PropTypes.number.isRequired,
   signUpStatus: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,

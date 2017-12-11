@@ -1,6 +1,6 @@
 {
   "name": "micro-business-common-react-native",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Micro Business Common React Native",
   "main": "./src/index.js",
   "scripts": {
@@ -14,8 +14,16 @@
   "author": "Micro Business ltd<micro.business.ltd@gmail.com>",
   "homepage": "https://bitbucket.org/microbusiness/micro-business-common-react-native#readme",
   "dependencies": {
+    "email-validator": "^1.1.1",
     "immutable": "^4.0.0-rc.9",
-    "react-native": "^0.50.4",
+    "micro-business-parse-server-common-react-native": "^1.1.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-native": "^0.51.0",
+    "react-native-easy-grid": "^0.1.15",
+    "react-native-elements": "^0.18.5",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "redux-saga": "^0.16.0"
   },
   "devDependencies": {
@@ -24,16 +32,16 @@
     "babel-jest": "^21.2.0",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
-    "eslint": "^4.12.1",
+    "eslint": "^4.13.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "6.0.2",
     "eslint-plugin-react": "^7.5.1",
-    "flow-bin": "^0.60.1",
+    "flow-bin": "^0.61.0",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "lint-staged": "^6.0.0",
-    "prettier": "^1.8.2"
+    "prettier": "^1.9.1"
   },
   "jest": {
     "rootDir": "./src"

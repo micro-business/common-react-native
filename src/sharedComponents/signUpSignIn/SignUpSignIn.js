@@ -1,33 +1,15 @@
 // @flow
 
 import emailValidator from 'email-validator';
-import {
-  Map
-} from 'immutable';
-import React, {
-  Component
-} from 'react';
+import { Map } from 'immutable';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ActivityIndicator,
-  ScrollView,
-  View
-} from 'react-native';
-import {
-  Col,
-  Row
-} from 'react-native-easy-grid';
-import {
-  Button,
-  FormLabel,
-  FormInput,
-  FormValidationMessage,
-  Text
-} from 'react-native-elements';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
+import { Col, Row } from 'react-native-easy-grid';
+import { Button, FormLabel, FormInput, FormValidationMessage, Text } from 'react-native-elements';
 import Styles from './Styles';
-import {
-  Color
-} from '../../framework/style/DefaultStyles';
+// TODO: Morteza: Pass down the colors through props
+/* import { Color } from '../../framework/style/DefaultStyles'; */
 
 class UserSignInSignUpPresentational extends Component {
   constructor(props, context) {
@@ -53,46 +35,40 @@ class UserSignInSignUpPresentational extends Component {
     };
   }
 
-  onSignInEmailAddressChanged = text => {
+  onSignInEmailAddressChanged = (text) => {
     this.setState({
-      data: this.state.data.set('signInEmailAddress', text.toLowerCase())
-        .set('signInEmailAddressChanged', true),
+      data: this.state.data.set('signInEmailAddress', text.toLowerCase()).set('signInEmailAddressChanged', true),
     });
   };
 
-  onSignInPasswordChanged = text => {
+  onSignInPasswordChanged = (text) => {
     this.setState({
-      data: this.state.data.set('signInPassword', text)
-        .set('signInPasswordChanged', true),
+      data: this.state.data.set('signInPassword', text).set('signInPasswordChanged', true),
     });
   };
 
-  onSignUpEmailAddressChanged = text => {
+  onSignUpEmailAddressChanged = (text) => {
     this.setState({
-      data: this.state.data.set('signUpEmailAddress', text.toLowerCase())
-        .set('signUpEmailAddressChanged', true),
+      data: this.state.data.set('signUpEmailAddress', text.toLowerCase()).set('signUpEmailAddressChanged', true),
     });
   };
 
-  onSignUpPasswordChanged = text => {
+  onSignUpPasswordChanged = (text) => {
     this.setState({
-      data: this.state.data.set('signUpPassword', text)
-        .set('signUpPasswordChanged', true),
+      data: this.state.data.set('signUpPassword', text).set('signUpPasswordChanged', true),
     });
   };
 
-  onSignUpConfirmPasswordChanged = text => {
+  onSignUpConfirmPasswordChanged = (text) => {
     this.setState({
-      data: this.state.data.set('signUpConfirmPassword', text)
-        .set('signUpConfirmPasswordChanged', true),
+      data: this.state.data.set('signUpConfirmPassword', text).set('signUpConfirmPasswordChanged', true),
     });
   };
 
   onSignInClicked = () => {
     if (this.state.data.get('signInInputAreaHidden')) {
       this.setState({
-        data: this.state.data.set('signInInputAreaHidden', false)
-          .set('signUpInputAreaHidden', true),
+        data: this.state.data.set('signInInputAreaHidden', false).set('signUpInputAreaHidden', true),
       });
     } else {
       this.setState({
@@ -108,8 +84,7 @@ class UserSignInSignUpPresentational extends Component {
   onSignUpClicked = () => {
     if (this.state.data.get('signUpInputAreaHidden')) {
       this.setState({
-        data: this.state.data.set('signInInputAreaHidden', true)
-          .set('signUpInputAreaHidden', false),
+        data: this.state.data.set('signInInputAreaHidden', true).set('signUpInputAreaHidden', false),
       });
     } else {
       this.setState({
@@ -122,64 +97,54 @@ class UserSignInSignUpPresentational extends Component {
     }
   };
 
-  getSignInEmailErrorMessage = buttonPressed => {
+  getSignInEmailErrorMessage = (buttonPressed) => {
     if (this.state.data.get('signInEmailAddressChanged') || buttonPressed) {
       const emailAddress = this.state.data.get('signInEmailAddress');
 
       if (emailAddress) {
         return emailValidator.validate(emailAddress) ? null : 'Email address is badly formatted.';
-      } else {
-        return 'Email address is required.';
       }
-    } else {
-      return null;
+      return 'Email address is required.';
     }
+    return null;
   };
 
-  getSignInPasswordErrorMessage = buttonPressed => {
+  getSignInPasswordErrorMessage = (buttonPressed) => {
     if (this.state.data.get('signInPasswordChanged') || buttonPressed) {
       return this.state.data.get('signInPassword') ? null : 'Password is required.';
-    } else {
-      return null;
     }
+    return null;
   };
 
-  getSignUpEmailErrorMessage = buttonPressed => {
+  getSignUpEmailErrorMessage = (buttonPressed) => {
     if (this.state.data.get('signUpEmailAddressChanged') || buttonPressed) {
       const emailAddress = this.state.data.get('signUpEmailAddress');
 
       if (emailAddress) {
         return emailValidator.validate(emailAddress) ? null : 'Email address is badly formatted.';
-      } else {
-        return 'Email address is required.';
       }
-    } else {
-      return null;
+      return 'Email address is required.';
     }
+    return null;
   };
 
-  getSignUpPasswordErrorMessage = buttonPressed => {
+  getSignUpPasswordErrorMessage = (buttonPressed) => {
     if (this.state.data.get('signUpPasswordChanged') || buttonPressed) {
       const password = this.state.data.get('signUpPassword');
 
-      if (!password || password.trim()
-        .length === 0) {
+      if (!password || password.trim().length === 0) {
         return 'Password is required.';
-      } else if (password.trim()
-        .length < 6) {
+      } else if (password.trim().length < 6) {
         return 'Password length must be at least 6 characters.';
-      } else if (password.trim()
-        .length > 100) {
+      } else if (password.trim().length > 100) {
         return 'Password length cannot be longer than 100 characters.';
-      } else {
-        return null;
       }
-    } else {
       return null;
     }
+    return null;
   };
 
-  getSignUpConfirmPasswordErrorMessage = buttonPressed => {
+  getSignUpConfirmPasswordErrorMessage = (buttonPressed) => {
     if (this.state.data.get('signUpConfirmPasswordChanged') || buttonPressed) {
       if (this.getSignUpPasswordErrorMessage(buttonPressed)) {
         return null;
@@ -190,49 +155,42 @@ class UserSignInSignUpPresentational extends Component {
 
       if (password.localeCompare(confirmPassword) === 0) {
         return null;
-      } else {
-        return 'Please re-enter your password.';
       }
-    } else {
-      return null;
+      return 'Please re-enter your password.';
     }
+    return null;
   };
 
-  renderErrorMessage = errorMessage => {
+  renderErrorMessage = (errorMessage) => {
     if (errorMessage) {
       return <FormValidationMessage> {errorMessage}</FormValidationMessage>;
-    } else {
-      return <View />;
     }
+    return <View />;
   };
 
-  renderFacebookButton = () => {
-    return (
-      <Button
-        title="Sign in with Facebook"
-        icon={{ name: 'facebook', type: 'material-community' }}
-        backgroundColor="#3b5998"
-        buttonStyle={Styles.button}
-        onPress={this.props.onSignInWithFacebookClicked}
-      />
-    );
-  };
+  renderFacebookButton = () => (
+    <Button
+      title="Sign in with Facebook"
+      icon={{ name: 'facebook', type: 'material-community' }}
+      backgroundColor="#3b5998"
+      buttonStyle={Styles.button}
+      onPress={this.props.onSignInWithFacebookClicked}
+    />
+  );
 
-  renderSignInButton = () => {
-    return (
-      <Button
-        title="Sign in via Email"
-        onPress={this.onSignInClicked}
-        buttonStyle={Styles.button}
-        containerViewStyle={Styles.signInButtonContainerViewStyle}
-        icon={{ name: 'email', type: 'material-community' }}
-        backgroundColor={Color.secondaryColorAction}
-      />
-    );
-  };
+  renderSignInButton = () => (
+    <Button
+      title="Sign in via Email"
+      onPress={this.onSignInClicked}
+      buttonStyle={Styles.button}
+      containerViewStyle={Styles.signInButtonContainerViewStyle}
+      icon={{ name: 'email', type: 'material-community' }}
+      backgroundColor="#3b5998"
+    />
+  );
 
-  renderSignInInputArea = () => {
-    return this.state.data.get('signInInputAreaHidden') ? (
+  renderSignInInputArea = () =>
+    (this.state.data.get('signInInputAreaHidden') ? (
       this.renderSignInButton()
     ) : (
       <View>
@@ -254,25 +212,22 @@ class UserSignInSignUpPresentational extends Component {
         {this.renderErrorMessage(this.getSignInPasswordErrorMessage(this.state.data.get('signInButtonPressed')))}
         {this.renderSignInButton()}
       </View>
-    );
-  };
+    ));
 
-  renderSignUpButton = () => {
-    return (
-      <Button
-        raised
-        title="Create Account"
-        onPress={this.onSignUpClicked}
-        buttonStyle={Styles.button}
-        containerViewStyle={Styles.signUpButtonContainerViewStyle}
-        icon={{ name: 'md-log-in', type: 'ionicon' }}
-        backgroundColor={Color.primaryColorNormal}
-      />
-    );
-  };
+  renderSignUpButton = () => (
+    <Button
+      raised
+      title="Create Account"
+      onPress={this.onSignUpClicked}
+      buttonStyle={Styles.button}
+      containerViewStyle={Styles.signUpButtonContainerViewStyle}
+      icon={{ name: 'md-log-in', type: 'ionicon' }}
+      backgroundColor="#3b5998"
+    />
+  );
 
-  renderSignUpInputArea = () => {
-    return this.state.data.get('signUpInputAreaHidden') ? (
+  renderSignUpInputArea = () =>
+    (this.state.data.get('signUpInputAreaHidden') ? (
       this.renderSignUpButton()
     ) : (
       <View>
@@ -302,8 +257,7 @@ class UserSignInSignUpPresentational extends Component {
         {this.renderErrorMessage(this.getSignUpConfirmPasswordErrorMessage(this.state.data.get('signUpButtonPressed')))}
         {this.renderSignUpButton()}
       </View>
-    );
-  };
+    ));
 
   renderSignUpOrSignInIsInProgressIndicator = () => {
     if (this.props.signUpOrSignInIsInProgress) {
@@ -314,29 +268,26 @@ class UserSignInSignUpPresentational extends Component {
           </Col>
         </Row>
       );
-    } else {
-      return <View />;
     }
+    return <View />;
   };
 
-  render = () => {
-    return (
-      <ScrollView style={Styles.scrollView} keyboardShouldPersistTaps="always">
-        <View style={Styles.topContainer}>
-          <Text h2 style={Styles.title}>
-            {' '}
-            {this.props.title}
-          </Text>
-        </View>
+  render = () => (
+    <ScrollView style={Styles.scrollView} keyboardShouldPersistTaps="always">
+      <View style={Styles.topContainer}>
+        <Text h2 style={Styles.title}>
+          {' '}
+          {this.props.title}
+        </Text>
+      </View>
 
-        <View>{this.renderSignUpOrSignInIsInProgressIndicator()}</View>
-        <View>{this.renderFacebookButton()}</View>
-        <View>{this.renderSignInInputArea()}</View>
-        <View>{this.renderSignUpInputArea()}</View>
-        <View />
-      </ScrollView>
-    );
-  };
+      <View>{this.renderSignUpOrSignInIsInProgressIndicator()}</View>
+      <View>{this.renderFacebookButton()}</View>
+      <View>{this.renderSignInInputArea()}</View>
+      <View>{this.renderSignUpInputArea()}</View>
+      <View />
+    </ScrollView>
+  );
 }
 
 UserSignInSignUpPresentational.propTypes = {
