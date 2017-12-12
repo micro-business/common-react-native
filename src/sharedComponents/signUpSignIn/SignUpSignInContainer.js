@@ -1,8 +1,7 @@
 // @flow
 
-// TODO: Morteza: Move useracess actions and status to somewhere more generic, so we do not have to add ...parse-server-common.... as dependency
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
-import { UserAccessStatus } from 'micro-business-parse-server-common-react-native';
+import * as userAccessActions from 'micro-business-common-react/src/userAccess/Actions';
+import { UserAccessStatus } from 'micro-business-common-react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
