@@ -1,6 +1,6 @@
 {
   "name": "micro-business-common-react-native",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Micro Business Common React Native",
   "main": "./src/index.js",
   "scripts": {
@@ -13,13 +13,12 @@
   },
   "author": "Micro Business ltd<micro.business.ltd@gmail.com>",
   "homepage": "https://bitbucket.org/microbusiness/micro-business-common-react-native#readme",
-  "peerDependencies": {
+  "dependencies": {
     "email-validator": "^1.1.1",
     "immutable": "^4.0.0-rc.9",
-    "micro-business-parse-server-common-react-native": "^1.1.4",
+    "micro-business-parse-server-common-react-native": "^1.1.6",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
-    "react-native": "^0.51.0",
     "react-native-easy-grid": "^0.1.15",
     "react-native-elements": "^0.18.5",
     "react-redux": "^5.0.6",
@@ -41,6 +40,7 @@
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "lint-staged": "^6.0.0",
+    "react-native": "^0.51.0",
     "prettier": "^1.9.2"
   },
   "jest": {
