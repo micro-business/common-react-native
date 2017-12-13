@@ -1,6 +1,6 @@
 {
   "name": "micro-business-common-react-native",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "Micro Business Common React Native",
   "main": "./src/index.js",
   "scripts": {
@@ -16,12 +16,14 @@
   "dependencies": {
     "email-validator": "^1.1.1",
     "immutable": "^4.0.0-rc.9",
+    "lodash.debounce": "^4.0.8",
     "micro-business-common-react": "^1.1.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-native": "^0.51.0",
     "react-native-easy-grid": "^0.1.15",
     "react-native-elements": "^0.18.5",
+    "react-navigation": "^1.0.0-beta.21",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0"
