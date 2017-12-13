@@ -2,19 +2,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  View
-} from 'react-native';
-import {
-  Button,
-  Text
-} from 'react-native-elements';
+import { View } from 'react-native';
+import { Button, Text } from 'react-native-elements';
 import Styles from './Styles';
 
-const ErrorMessageWithRetry = ({
-  onRetryPressed,
-  errorMessage
-}) => (
+const ErrorMessageWithRetry = ({ onRetryPressed, errorMessage }) => (
   <View style={Styles.container}>
     <Text>{errorMessage}</Text>
     <Button
@@ -34,7 +26,7 @@ ErrorMessageWithRetry.propTypes = {
   retryButtonColor: PropTypes.string,
 };
 
-SearchBarWithDelay.defaultProps = {
+ErrorMessageWithRetry.defaultProps = {
   retryButtonColor: '#2891F2',
 };
 

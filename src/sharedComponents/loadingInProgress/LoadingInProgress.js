@@ -2,19 +2,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  View,
-  ActivityIndicator
-} from 'react-native';
-import {
-  Text
-} from 'react-native-elements';
+import { View, ActivityIndicator } from 'react-native';
+import { Text } from 'react-native-elements';
 import Styles from './Styles';
 
-const LoadingInProgress = ({
-  messageToDisplay,
-  activityIndicatorColor
-}) => (
+const LoadingInProgress = ({ messageToDisplay, activityIndicatorColor }) => (
   <View style={Styles.container}>
     <Text>{messageToDisplay}</Text>
     <ActivityIndicator size="large" color={activityIndicatorColor} style={Styles.activityIndicator} />

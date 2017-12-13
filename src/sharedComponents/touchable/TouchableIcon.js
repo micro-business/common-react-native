@@ -2,25 +2,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  View
-} from 'react-native';
-import {
-  Icon
-} from 'react-native-elements';
+import { View } from 'react-native';
+import { Icon } from 'react-native-elements';
+import TouchableItem from 'react-navigation/src/views/TouchableItem';
 import Styles from './Styles';
-import TouchableItem from './TouchableItem';
 
 const TouchableIcon = ({
-  onPress,
-  iconName,
-  iconType,
-  iconColor,
-  iconDisabledColor,
-  disabled,
-  iconSize,
-  iconContainerStyle,
-  pressColor,
+  onPress, iconName, iconType, iconColor, iconDisabledColor, disabled, iconSize, iconContainerStyle, pressColor,
 }) => (
   <View style={Styles.container}>
     <TouchableItem
@@ -48,13 +36,18 @@ TouchableIcon.propTypes = {
   onPress: PropTypes.func.isRequired,
   iconName: PropTypes.string.isRequired,
   iconType: PropTypes.string.isRequired,
-  onPress: PropTypes.string.isRequired,
   iconColor: PropTypes.string.isRequired,
   iconDisabledColor: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   iconSize: PropTypes.number,
-  iconContainerStyle: PropTypes.object,
+  iconContainerStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   pressColor: PropTypes.string.isRequired,
+};
+
+TouchableIcon.defaultProps = {
+  disabled: false,
+  iconSize: 28,
+  iconContainerStyle: null,
 };
 
 export default TouchableIcon;
