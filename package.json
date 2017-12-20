@@ -1,6 +1,6 @@
 {
   "name": "micro-business-common-react-native",
-  "version": "1.1.12",
+  "version": "1.1.14",
   "description": "Micro Business Common React Native",
   "main": "./src/index.js",
   "scripts": {
@@ -15,15 +15,17 @@
   "homepage": "https://bitbucket.org/microbusiness/micro-business-common-react-native#readme",
   "dependencies": {
     "email-validator": "^1.1.1",
+    "i18next": "^10.2.1",
     "immutable": "^4.0.0-rc.9",
     "lodash.debounce": "^4.0.8",
     "micro-business-common-react": "^1.1.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-i18next": "^7.3.0",
     "react-native": "^0.51.0",
     "react-native-easy-grid": "^0.1.15",
     "react-native-elements": "^0.18.5",
-    "react-navigation": "^1.0.0-beta.21",
+    "react-navigation": "^1.0.0-beta.22",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0"
@@ -31,7 +33,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.3",
-    "babel-jest": "^21.2.0",
+    "babel-jest": "^22.0.3",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "eslint": "^4.13.1",
@@ -41,7 +43,7 @@
     "eslint-plugin-react": "^7.5.1",
     "flow-bin": "^0.61.0",
     "husky": "^0.14.3",
-    "jest": "^21.2.1",
+    "jest": "^22.0.3",
     "lint-staged": "^6.0.0",
     "prettier": "^1.9.2"
   },
