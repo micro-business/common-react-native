@@ -21,7 +21,7 @@
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
-    "react-i18next": "^7.3.0",
+    "react-i18next": "^7.3.1",
     "react-native": "^0.52.0",
     "react-native-easy-grid": "^0.1.16",
     "react-native-elements": "^0.18.5",
@@ -43,9 +43,9 @@
     "eslint-plugin-react": "^7.5.1",
     "flow-bin": "^0.63.1",
     "husky": "^0.14.3",
-    "jest": "^22.0.4",
+    "jest": "^22.0.5",
     "lint-staged": "^6.0.0",
-    "prettier": "^1.9.2"
+    "prettier": "^1.10.2"
   },
   "jest": {
     "rootDir": "./src"
