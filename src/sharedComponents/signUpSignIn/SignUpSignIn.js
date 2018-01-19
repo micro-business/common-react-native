@@ -4,7 +4,7 @@ import emailValidator from 'email-validator';
 import { Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ActivityIndicator, ScrollView, View } from 'react-native';
+import { ActivityIndicator, ScrollView, View, ImageBackground } from 'react-native';
 import { Col, Row } from 'react-native-easy-grid';
 import { Button, FormLabel, FormInput, FormValidationMessage, Text } from 'react-native-elements';
 import Styles from './Styles';
@@ -273,20 +273,26 @@ class UserSignInSignUpPresentational extends Component {
   };
 
   render = () => (
-    <ScrollView style={Styles.scrollView} keyboardShouldPersistTaps="always">
-      <View style={Styles.topContainer}>
-        <Text h2 style={Styles.title}>
-          {' '}
-          {this.props.title}
-        </Text>
-      </View>
-
-      <View>{this.renderSignUpOrSignInIsInProgressIndicator()}</View>
-      <View>{this.renderFacebookButton()}</View>
-      <View>{this.renderSignInInputArea()}</View>
-      <View>{this.renderSignUpInputArea()}</View>
-      <View />
-    </ScrollView>
+    <ImageBackground
+      style={Styles.backgroundImage}
+      source={{
+        uri: this.props.backgroundImageUrl,
+      }}
+    >
+      <ScrollView style={Styles.scrollView} keyboardShouldPersistTaps="always">
+        <View style={Styles.topContainer}>
+          <Text h2 style={this.props.titleTextColor ? { color: this.props.titleTextColor } : Styles.title}>
+            {' '}
+            {this.props.title}
+          </Text>
+        </View>
+        <View>{this.renderSignUpOrSignInIsInProgressIndicator()}</View>
+        {this.props.enableFacebookSignIn ? <View>{this.renderFacebookButton()}</View> : <View />}
+        <View>{this.renderSignInInputArea()}</View>
+        {this.props.enableCreateAccount ? <View>{this.renderSignUpInputArea()}</View> : <View />}
+        <View />
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
@@ -296,6 +302,10 @@ UserSignInSignUpPresentational.propTypes = {
   onSignUpClicked: PropTypes.func.isRequired,
   signUpOrSignInIsInProgress: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
+  titleTextColor: PropTypes.string.isRequired,
+  backgroundImageUrl: PropTypes.string.isRequired,
+  enableFacebookSignIn: PropTypes.bool.isRequired,
+  enableCreateAccount: PropTypes.bool.isRequired,
 };
 
 export default UserSignInSignUpPresentational;

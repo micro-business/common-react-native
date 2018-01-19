@@ -8,9 +8,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     padding: 8,
   },
-  scrollView: {
-    backgroundColor: 'white',
-  },
+  scrollView: {},
   topContainer: {
     paddingTop: 80,
     justifyContent: 'center',
@@ -31,5 +29,10 @@ export default StyleSheet.create({
   },
   signUpButtonContainerViewStyle: {
     borderRadius: 35,
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

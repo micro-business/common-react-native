@@ -34,6 +34,10 @@ class UserSignInSignUpContainer extends Component {
         this.props.signInStatus === UserAccessStatus.IN_PROGRESS || this.props.signUpStatus === UserAccessStatus.IN_PROGRESS
       }
       title={this.props.title}
+      titleTextColor={this.props.titleTextColor}
+      enableFacebookSignIn={this.props.enableFacebookSignIn}
+      enableCreateAccount={this.props.enableCreateAccount}
+      backgroundImageUrl={this.props.backgroundImageUrl}
     />
   );
 }
@@ -43,6 +47,17 @@ UserSignInSignUpContainer.propTypes = {
   signInStatus: PropTypes.number.isRequired,
   signUpStatus: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  titleTextColor: PropTypes.string,
+  backgroundImageUrl: PropTypes.string,
+  enableFacebookSignIn: PropTypes.bool,
+  enableCreateAccount: PropTypes.bool,
+};
+
+UserSignInSignUpContainer.defaultProps = {
+  enableFacebookSignIn: true,
+  enableCreateAccount: true,
+  backgroundImageUrl: null,
+  titleTextColor: null,
 };
 
 function mapStateToProps(state, props) {
@@ -50,6 +65,10 @@ function mapStateToProps(state, props) {
     signInStatus: state.userAccess.get('signInStatus'),
     signUpStatus: state.userAccess.get('signUpStatus'),
     title: props.title,
+    titleTextColor: props.titleTextColor,
+    enableFacebookSignIn: props.enableFacebookSignIn,
+    enableCreateAccount: props.enableCreateAccount,
+    backgroundImageUrl: props.backgroundImageUrl,
   };
 }
 
