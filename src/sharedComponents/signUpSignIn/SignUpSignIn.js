@@ -180,7 +180,7 @@ class UserSignInSignUpPresentational extends Component {
 
   renderSignInButton = () => (
     <Button
-      title="Sign in via Email"
+      title="Continue with Email"
       onPress={this.onSignInClicked}
       buttonStyle={Styles.button}
       containerViewStyle={Styles.signInButtonContainerViewStyle}
@@ -290,6 +290,17 @@ class UserSignInSignUpPresentational extends Component {
         {this.props.enableFacebookSignIn ? <View>{this.renderFacebookButton()}</View> : <View />}
         <View>{this.renderSignInInputArea()}</View>
         {this.props.enableCreateAccount ? <View>{this.renderSignUpInputArea()}</View> : <View />}
+        <View>
+          <Text style={this.props.titleTextColor ? { color: this.props.titleTextColor } : Styles.title}>
+            By tapping Continue you agree to the following
+          </Text>
+          <Text onPress={() => this.props.handleClickHyperLink(this.props.termAndConditionUrl)} style={Styles.hyperLink}>
+            Terms & Conditions
+          </Text>
+          <Text style={this.props.titleTextColor ? { color: this.props.titleTextColor } : Styles.title}>
+            © Copyright 2017-{new Date().getFullYear()} {this.props.companyName}, all rights reserved.
+          </Text>
+        </View>
         <View />
       </ScrollView>
     </ImageBackground>
@@ -306,6 +317,9 @@ UserSignInSignUpPresentational.propTypes = {
   backgroundImageUrl: PropTypes.string.isRequired,
   enableFacebookSignIn: PropTypes.bool.isRequired,
   enableCreateAccount: PropTypes.bool.isRequired,
+  handleClickHyperLink: PropTypes.func.isRequired,
+  termAndConditionUrl: PropTypes.string.isRequired,
+  companyName: PropTypes.string.isRequired,
 };
 
 export default UserSignInSignUpPresentational;

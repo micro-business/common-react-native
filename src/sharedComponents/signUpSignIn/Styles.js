@@ -35,4 +35,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  hyperLink: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+  },
 });

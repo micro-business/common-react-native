@@ -3,6 +3,7 @@
 import * as userAccessActions from '@microbusiness/common-react/src/userAccess/Actions';
 import { UserAccessStatus } from '@microbusiness/common-react';
 import React, { Component } from 'react';
+import { Linking } from 'react-native';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -25,6 +26,14 @@ class UserSignInSignUpContainer extends Component {
     this.props.userAccessActions.signUpWithUsernameAndPassword(emailAddress, password, emailAddress, 'individual');
   };
 
+  handleClickHyperLink = (url) => {
+    Linking.canOpenURL(url).then((supported) => {
+      if (supported) {
+        Linking.openURL(url);
+      }
+    });
+  };
+
   render = () => (
     <SignUpSignIn
       onSignInWithFacebookClicked={this.onSignInWithFacebookClicked}
@@ -33,11 +42,14 @@ class UserSignInSignUpContainer extends Component {
       signUpOrSignInIsInProgress={
         this.props.signInStatus === UserAccessStatus.IN_PROGRESS || this.props.signUpStatus === UserAccessStatus.IN_PROGRESS
       }
+      handleClickHyperLink={this.handleClickHyperLink}
       title={this.props.title}
       titleTextColor={this.props.titleTextColor}
       enableFacebookSignIn={this.props.enableFacebookSignIn}
       enableCreateAccount={this.props.enableCreateAccount}
       backgroundImageUrl={this.props.backgroundImageUrl}
+      termAndConditionUrl={this.props.termAndConditionUrl}
+      companyName={this.props.companyName}
     />
   );
 }
@@ -51,6 +63,8 @@ UserSignInSignUpContainer.propTypes = {
   backgroundImageUrl: PropTypes.string,
   enableFacebookSignIn: PropTypes.bool,
   enableCreateAccount: PropTypes.bool,
+  termAndConditionUrl: PropTypes.string.isRequired,
+  companyName: PropTypes.string.isRequired,
 };
 
 UserSignInSignUpContainer.defaultProps = {
@@ -69,6 +83,8 @@ function mapStateToProps(state, props) {
     enableFacebookSignIn: props.enableFacebookSignIn,
     enableCreateAccount: props.enableCreateAccount,
     backgroundImageUrl: props.backgroundImageUrl,
+    termAndConditionUrl: props.termAndConditionUrl,
+    companyName: props.companyName,
   };
 }
 
