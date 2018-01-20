@@ -10,7 +10,13 @@ export default StyleSheet.create({
   },
   scrollView: {},
   topContainer: {
-    paddingTop: 80,
+    paddingTop: 100,
+    paddingBottom: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  termAndConditionContainter: {
+    paddingTop: 50,
     justifyContent: 'center',
     alignItems: 'center',
   },

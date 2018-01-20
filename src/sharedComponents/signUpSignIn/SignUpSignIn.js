@@ -290,7 +290,7 @@ class UserSignInSignUpPresentational extends Component {
         {this.props.enableFacebookSignIn ? <View>{this.renderFacebookButton()}</View> : <View />}
         <View>{this.renderSignInInputArea()}</View>
         {this.props.enableCreateAccount ? <View>{this.renderSignUpInputArea()}</View> : <View />}
-        <View>
+        <View style={Styles.termAndConditionContainter}>
           <Text style={this.props.titleTextColor ? { color: this.props.titleTextColor } : Styles.title}>
             By tapping Continue you agree to the following
           </Text>
