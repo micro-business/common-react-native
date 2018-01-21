@@ -1,6 +1,7 @@
 // @flow
 
 export { NetInfoReducer, watchRefreshState } from './netInfo';
+export { watchReadValue, watchWriteValue } from './asyncStorage';
 export {
   ErrorMessageWithRetry,
   ListItemSeparator,
