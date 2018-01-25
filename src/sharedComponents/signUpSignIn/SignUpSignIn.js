@@ -194,20 +194,24 @@ class UserSignInSignUpPresentational extends Component {
       this.renderSignInButton()
     ) : (
       <View>
-        <FormLabel>Email</FormLabel>
+        <FormLabel labelStyle={{ color: this.props.labelTextColor }}>Email</FormLabel>
         <FormInput
           onChangeText={this.onSignInEmailAddressChanged}
           value={this.state.data.get('signInEmailAddress')}
           placeholder="Please enter your email address"
           keyboardType="email-address"
+          placeholderTextColor={this.props.inputPlaceholderTextColor}
+          inputStyle={{ color: this.props.inputPlaceholderTextColor }}
         />
         {this.renderErrorMessage(this.getSignInEmailErrorMessage(this.state.data.get('signInButtonPressed')))}
-        <FormLabel>Password</FormLabel>
+        <FormLabel labelStyle={{ color: this.props.labelTextColor }}>Password</FormLabel>
         <FormInput
           onChangeText={this.onSignInPasswordChanged}
           value={this.state.data.get('signInPassword')}
           placeholder="Please enter your password"
           secureTextEntry
+          placeholderTextColor={this.props.inputPlaceholderTextColor}
+          inputStyle={{ color: this.props.inputPlaceholderTextColor }}
         />
         {this.renderErrorMessage(this.getSignInPasswordErrorMessage(this.state.data.get('signInButtonPressed')))}
         {this.renderSignInButton()}
@@ -320,6 +324,8 @@ UserSignInSignUpPresentational.propTypes = {
   handleClickHyperLink: PropTypes.func.isRequired,
   termAndConditionUrl: PropTypes.string.isRequired,
   companyName: PropTypes.string.isRequired,
+  labelTextColor: PropTypes.string.isRequired,
+  inputPlaceholderTextColor: PropTypes.string.isRequired,
 };
 
 export default UserSignInSignUpPresentational;
