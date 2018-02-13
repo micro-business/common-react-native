@@ -2,8 +2,8 @@
 
 import * as userAccessActions from '@microbusiness/common-react/src/userAccess/Actions';
 import { UserAccessStatus } from '@microbusiness/common-react';
-import React, { Component } from 'react';
-import { Linking } from 'react-native';
+import React, { Component } from 'react'; // eslint-disable-line import/no-extraneous-dependencies
+import { Linking } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -26,8 +26,8 @@ class UserSignInSignUpContainer extends Component {
     this.props.userAccessActions.signUpWithUsernameAndPassword(emailAddress, password, emailAddress, 'individual');
   };
 
-  handleClickHyperLink = (url) => {
-    Linking.canOpenURL(url).then((supported) => {
+  handleClickHyperLink = url => {
+    Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
       }

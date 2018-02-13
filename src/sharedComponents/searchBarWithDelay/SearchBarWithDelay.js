@@ -1,8 +1,8 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'; // eslint-disable-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 import { SearchBar } from 'react-native-elements';
 import debounce from 'lodash.debounce';
 import Styles from './Styles';
@@ -22,6 +22,7 @@ class SearchBarWithDelay extends Component {
     this.setState({
       searchKeyword: '',
     });
+
     this.props.onSearchKeywordChanged('');
   }
 
@@ -31,7 +32,7 @@ class SearchBarWithDelay extends Component {
     });
   }
 
-  searchKeywordChanged = (searchKeyword) => {
+  searchKeywordChanged = searchKeyword => {
     this.setState(
       {
         searchKeyword,

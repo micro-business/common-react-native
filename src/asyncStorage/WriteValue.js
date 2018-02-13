@@ -3,7 +3,7 @@
 import { AsyncStorageActionTypes } from '@microbusiness/common-react';
 import * as Actions from '@microbusiness/common-react/src/asyncStorage/Actions';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 
 function* writeValueAsync(action) {
   try {

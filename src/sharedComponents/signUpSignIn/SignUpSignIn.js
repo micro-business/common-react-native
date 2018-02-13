@@ -2,14 +2,12 @@
 
 import emailValidator from 'email-validator';
 import { Map } from 'immutable';
-import React, { Component } from 'react';
+import React, { Component } from 'react'; // eslint-disable-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { ActivityIndicator, ScrollView, View, ImageBackground } from 'react-native';
+import { ActivityIndicator, ScrollView, View, ImageBackground } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 import { Col, Row } from 'react-native-easy-grid';
 import { Button, FormLabel, FormInput, FormValidationMessage, Text } from 'react-native-elements';
 import Styles from './Styles';
-// TODO: Morteza: Pass down the colors through props
-/* import { Color } from '../../framework/style/DefaultStyles'; */
 
 class UserSignInSignUpPresentational extends Component {
   constructor(props, context) {
@@ -35,31 +33,31 @@ class UserSignInSignUpPresentational extends Component {
     };
   }
 
-  onSignInEmailAddressChanged = (text) => {
+  onSignInEmailAddressChanged = text => {
     this.setState({
       data: this.state.data.set('signInEmailAddress', text.toLowerCase()).set('signInEmailAddressChanged', true),
     });
   };
 
-  onSignInPasswordChanged = (text) => {
+  onSignInPasswordChanged = text => {
     this.setState({
       data: this.state.data.set('signInPassword', text).set('signInPasswordChanged', true),
     });
   };
 
-  onSignUpEmailAddressChanged = (text) => {
+  onSignUpEmailAddressChanged = text => {
     this.setState({
       data: this.state.data.set('signUpEmailAddress', text.toLowerCase()).set('signUpEmailAddressChanged', true),
     });
   };
 
-  onSignUpPasswordChanged = (text) => {
+  onSignUpPasswordChanged = text => {
     this.setState({
       data: this.state.data.set('signUpPassword', text).set('signUpPasswordChanged', true),
     });
   };
 
-  onSignUpConfirmPasswordChanged = (text) => {
+  onSignUpConfirmPasswordChanged = text => {
     this.setState({
       data: this.state.data.set('signUpConfirmPassword', text).set('signUpConfirmPasswordChanged', true),
     });
@@ -97,7 +95,7 @@ class UserSignInSignUpPresentational extends Component {
     }
   };
 
-  getSignInEmailErrorMessage = (buttonPressed) => {
+  getSignInEmailErrorMessage = buttonPressed => {
     if (this.state.data.get('signInEmailAddressChanged') || buttonPressed) {
       const emailAddress = this.state.data.get('signInEmailAddress');
 
@@ -109,14 +107,14 @@ class UserSignInSignUpPresentational extends Component {
     return null;
   };
 
-  getSignInPasswordErrorMessage = (buttonPressed) => {
+  getSignInPasswordErrorMessage = buttonPressed => {
     if (this.state.data.get('signInPasswordChanged') || buttonPressed) {
       return this.state.data.get('signInPassword') ? null : 'Password is required.';
     }
     return null;
   };
 
-  getSignUpEmailErrorMessage = (buttonPressed) => {
+  getSignUpEmailErrorMessage = buttonPressed => {
     if (this.state.data.get('signUpEmailAddressChanged') || buttonPressed) {
       const emailAddress = this.state.data.get('signUpEmailAddress');
 
@@ -128,7 +126,7 @@ class UserSignInSignUpPresentational extends Component {
     return null;
   };
 
-  getSignUpPasswordErrorMessage = (buttonPressed) => {
+  getSignUpPasswordErrorMessage = buttonPressed => {
     if (this.state.data.get('signUpPasswordChanged') || buttonPressed) {
       const password = this.state.data.get('signUpPassword');
 
@@ -144,7 +142,7 @@ class UserSignInSignUpPresentational extends Component {
     return null;
   };
 
-  getSignUpConfirmPasswordErrorMessage = (buttonPressed) => {
+  getSignUpConfirmPasswordErrorMessage = buttonPressed => {
     if (this.state.data.get('signUpConfirmPasswordChanged') || buttonPressed) {
       if (this.getSignUpPasswordErrorMessage(buttonPressed)) {
         return null;
@@ -161,7 +159,7 @@ class UserSignInSignUpPresentational extends Component {
     return null;
   };
 
-  renderErrorMessage = (errorMessage) => {
+  renderErrorMessage = errorMessage => {
     if (errorMessage) {
       return <FormValidationMessage> {errorMessage}</FormValidationMessage>;
     }
@@ -190,7 +188,7 @@ class UserSignInSignUpPresentational extends Component {
   );
 
   renderSignInInputArea = () =>
-    (this.state.data.get('signInInputAreaHidden') ? (
+    this.state.data.get('signInInputAreaHidden') ? (
       this.renderSignInButton()
     ) : (
       <View>
@@ -216,7 +214,7 @@ class UserSignInSignUpPresentational extends Component {
         {this.renderErrorMessage(this.getSignInPasswordErrorMessage(this.state.data.get('signInButtonPressed')))}
         {this.renderSignInButton()}
       </View>
-    ));
+    );
 
   renderSignUpButton = () => (
     <Button
@@ -231,7 +229,7 @@ class UserSignInSignUpPresentational extends Component {
   );
 
   renderSignUpInputArea = () =>
-    (this.state.data.get('signUpInputAreaHidden') ? (
+    this.state.data.get('signUpInputAreaHidden') ? (
       this.renderSignUpButton()
     ) : (
       <View>
@@ -261,7 +259,7 @@ class UserSignInSignUpPresentational extends Component {
         {this.renderErrorMessage(this.getSignUpConfirmPasswordErrorMessage(this.state.data.get('signUpButtonPressed')))}
         {this.renderSignUpButton()}
       </View>
-    ));
+    );
 
   renderSignUpOrSignInIsInProgressIndicator = () => {
     if (this.props.signUpOrSignInIsInProgress) {

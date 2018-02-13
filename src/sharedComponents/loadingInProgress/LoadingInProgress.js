@@ -1,8 +1,8 @@
 // @flow
 
-import React from 'react';
+import React from 'react'; // eslint-disable-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 import { Text } from 'react-native-elements';
 import Styles from './Styles';
 

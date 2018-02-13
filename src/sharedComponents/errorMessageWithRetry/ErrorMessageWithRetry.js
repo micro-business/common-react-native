@@ -1,8 +1,8 @@
 // @flow
 
-import React from 'react';
+import React from 'react'; // eslint-disable-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 import { Button, Text } from 'react-native-elements';
 import Styles from './Styles';
 

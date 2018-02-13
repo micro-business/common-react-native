@@ -2,7 +2,7 @@
 
 import { Map } from 'immutable';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { NetInfo } from 'react-native';
+import { NetInfo } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 import ActionTypes from './ActionTypes';
 import * as Actions from './Actions';
 
@@ -12,15 +12,19 @@ function* refreshStateAsync() {
     const isConnectionExpensive = yield call(NetInfo.isConnectionExpensive);
     const isConnected = yield call(NetInfo.isConnected.fetch);
 
-    yield put(Actions.stateChanged(Map({
-      netInfoExists: true,
-      connectionInfo: Map({
-        type: connectionInfo.type,
-        effectiveType: connectionInfo.effectiveType,
-      }),
-      isConnectionExpensive,
-      isConnected,
-    })));
+    yield put(
+      Actions.stateChanged(
+        Map({
+          netInfoExists: true,
+          connectionInfo: Map({
+            type: connectionInfo.type,
+            effectiveType: connectionInfo.effectiveType,
+          }),
+          isConnectionExpensive,
+          isConnected,
+        }),
+      ),
+    );
   } catch (exception) {
     yield put(Actions.stateChanged(Map({ netInfoExists: false })));
   }

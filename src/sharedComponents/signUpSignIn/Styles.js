@@ -1,6 +1,6 @@
 // @flow
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 
 export default StyleSheet.create({
   activityIndicator: {
