@@ -347,6 +347,7 @@ UserSignInSignUpPresentational.propTypes = {
   labelTextColor: PropTypes.string.isRequired,
   inputPlaceholderTextColor: PropTypes.string.isRequired,
   logoImageUrl: PropTypes.string.isRequired,
+  backgroundColor: PropTypes.string.isRequired,
 };
 
 export default UserSignInSignUpPresentational;

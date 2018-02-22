@@ -52,6 +52,8 @@ class UserSignInSignUpContainer extends Component {
       companyName={this.props.companyName}
       labelTextColor={this.props.labelTextColor}
       inputPlaceholderTextColor={this.props.inputPlaceholderTextColor}
+      logoImageUrl={this.props.logoImageUrl}
+      backgroundColor={this.props.backgroundColor}
     />
   );
 }
@@ -69,6 +71,8 @@ UserSignInSignUpContainer.propTypes = {
   companyName: PropTypes.string.isRequired,
   labelTextColor: PropTypes.string,
   inputPlaceholderTextColor: PropTypes.string,
+  logoImageUrl: PropTypes.string,
+  backgroundColor: PropTypes.string,
 };
 
 UserSignInSignUpContainer.defaultProps = {
@@ -78,6 +82,8 @@ UserSignInSignUpContainer.defaultProps = {
   titleTextColor: null,
   inputPlaceholderTextColor: null,
   labelTextColor: null,
+  logoImageUrl: null,
+  backgroundColor: '#24232D',
 };
 
 function mapStateToProps(state, props) {
