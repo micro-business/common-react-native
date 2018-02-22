@@ -274,13 +274,8 @@ class UserSignInSignUpPresentational extends Component {
     return <View />;
   };
 
-  render = () => (
-    <ImageBackground
-      style={Styles.backgroundImage}
-      source={{
-        uri: this.props.backgroundImageUrl,
-      }}
-    >
+  renderSignUpView = () => {
+    return (
       <ScrollView style={Styles.scrollView} keyboardShouldPersistTaps="always">
         <View style={Styles.topContainer}>
           <Text h2 style={this.props.titleTextColor ? { color: this.props.titleTextColor } : Styles.title}>
@@ -305,8 +300,25 @@ class UserSignInSignUpPresentational extends Component {
         </View>
         <View />
       </ScrollView>
-    </ImageBackground>
-  );
+    );
+  };
+
+  render = () => {
+    if (this.props.backgroundImage) {
+      return (
+        <ImageBackground
+          style={Styles.backgroundImage}
+          source={{
+            uri: this.props.backgroundImageUrl,
+          }}
+        >
+          {this.renderSignUpView()}
+        </ImageBackground>
+      );
+    } else {
+      return <View style={{ backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '' }}>{this.renderSignUpView()}</View>;
+    }
+  };
 }
 
 UserSignInSignUpPresentational.propTypes = {
