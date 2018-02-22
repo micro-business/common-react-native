@@ -4,7 +4,7 @@ import emailValidator from 'email-validator';
 import { Map } from 'immutable';
 import React, { Component } from 'react'; // eslint-disable-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { ActivityIndicator, ScrollView, View, ImageBackground } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import { ActivityIndicator, ScrollView, View, ImageBackground, Image } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 import { Col, Row } from 'react-native-easy-grid';
 import { Button, FormLabel, FormInput, FormValidationMessage, Text } from 'react-native-elements';
 import Styles from './Styles';
@@ -282,6 +282,16 @@ class UserSignInSignUpPresentational extends Component {
             {' '}
             {this.props.title}
           </Text>
+          {this.props.logoImageUrl ? (
+            <Image
+              style={Styles.logo}
+              source={{
+                uri: this.props.logoImageUrl,
+              }}
+            />
+          ) : (
+            <View />
+          )}
         </View>
         <View>{this.renderSignUpOrSignInIsInProgressIndicator()}</View>
         {this.props.enableFacebookSignIn ? <View>{this.renderFacebookButton()}</View> : <View />}
@@ -336,6 +346,7 @@ UserSignInSignUpPresentational.propTypes = {
   companyName: PropTypes.string.isRequired,
   labelTextColor: PropTypes.string.isRequired,
   inputPlaceholderTextColor: PropTypes.string.isRequired,
+  logoImageUrl: PropTypes.string.isRequired,
 };
 
 export default UserSignInSignUpPresentational;

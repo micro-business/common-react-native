@@ -45,4 +45,8 @@ export default StyleSheet.create({
     color: 'blue',
     textDecorationLine: 'underline',
   },
+  logo: {
+    width: 100,
+    height: 100,
+  },
 });
