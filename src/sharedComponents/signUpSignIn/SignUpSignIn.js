@@ -314,6 +314,11 @@ class UserSignInSignUpPresentational extends Component {
   };
 
   render = () => {
+    const style = {
+      backgroundColor: this.props.backgroundColor,
+      flex: 1,
+    };
+
     if (this.props.backgroundImage) {
       return (
         <ImageBackground
@@ -326,7 +331,7 @@ class UserSignInSignUpPresentational extends Component {
         </ImageBackground>
       );
     } else {
-      return <View style={{ backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '' }}>{this.renderSignUpView()}</View>;
+      return <View style={style}>{this.renderSignUpView()}</View>;
     }
   };
 }
