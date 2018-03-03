@@ -8,6 +8,12 @@ import debounce from 'lodash.debounce';
 import Styles from './Styles';
 
 class SearchBarWithDelay extends Component {
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      searchKeyword: nextProps.searchKeyword,
+    };
+  }
+
   constructor(props, context) {
     super(props, context);
 
@@ -16,12 +22,6 @@ class SearchBarWithDelay extends Component {
     };
 
     this.onSearchKeywordChanged = debounce(this.props.onSearchKeywordChanged, 300);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      searchKeyword: nextProps.searchKeyword,
-    });
   }
 
   searchKeywordChanged = searchKeyword => {
