@@ -18,14 +18,6 @@ class SearchBarWithDelay extends Component {
     this.onSearchKeywordChanged = debounce(this.props.onSearchKeywordChanged, 300);
   }
 
-  componentWillMount() {
-    this.setState({
-      searchKeyword: '',
-    });
-
-    this.props.onSearchKeywordChanged('');
-  }
-
   componentWillReceiveProps(nextProps) {
     this.setState({
       searchKeyword: nextProps.searchKeyword,
