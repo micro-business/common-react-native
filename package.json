@@ -1,6 +1,6 @@
 {
   "name": "@microbusiness/common-react-native",
-  "version": "1.1.50",
+  "version": "1.1.51",
   "description": "Micro Business Common React Native",
   "main": "./src/index.js",
   "scripts": {
@@ -14,20 +14,23 @@
   "author": "Micro Business ltd<micro.business.ltd@gmail.com>",
   "homepage": "https://bitbucket.org/microbusiness/micro-business-common-react-native#readme",
   "dependencies": {
-    "@microbusiness/common-react": "^1.1.14",
-    "email-validator": "^1.1.1",
-    "i18next": "^10.5.0",
-    "immutable": "^4.0.0-rc.9",
-    "lodash.debounce": "^4.0.8",
-    "prop-types": "^15.6.1",
-    "react-i18next": "^7.4.0",
-    "react-native-easy-grid": "^0.1.17",
-    "react-native-elements": "^0.19.0",
-    "react-redux": "^5.0.7",
-    "redux": "^3.7.2",
-    "redux-saga": "^0.16.0"
+    "email-validator": "^1.1.1"
+  },
+  "peerDependencies": {
+    "@microbusiness/common-react": "^1.x",
+    "i18next": "^10.x",
+    "immutable": "^4.x",
+    "lodash.debounce": "^4.x",
+    "prop-types": "^15.x",
+    "react-i18next": "^7.x",
+    "react-native-easy-grid": "^0.x",
+    "react-native-elements": "^0.x",
+    "react-redux": "^5.x",
+    "redux": "^3.x",
+    "redux-saga": "^0.x"
   },
   "devDependencies": {
+    "@microbusiness/common-react": "^1.1.15",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.1",
@@ -37,18 +40,28 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-flowtype": "^2.46.1",
     "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-jest": "^21.12.2",
+    "eslint-plugin-jest": "^21.14.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-react-native": "^3.2.1",
-    "flow-bin": "^0.66.0",
+    "flow-bin": "^0.67.1",
     "husky": "^0.14.3",
+    "i18next": "^10.5.0",
+    "immutable": "^4.0.0-rc.9",
     "jest": "^22.4.2",
     "lint-staged": "^7.0.0",
+    "lodash.debounce": "^4.0.8",
     "prettier": "^1.11.1",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-native": "^0.54.0",
-    "react-navigation": "1.0.0-beta.27"
+    "react-i18next": "^7.5.0",
+    "react-native": "^0.54.1",
+    "react-native-easy-grid": "^0.1.17",
+    "react-native-elements": "^0.19.0",
+    "react-navigation": "1.5.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0"
   },
   "jest": {
     "rootDir": "./src"
