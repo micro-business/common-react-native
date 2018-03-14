@@ -3,13 +3,20 @@
 import React from 'react'; // eslint-disable-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 import { View } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
-import { Button, Text } from 'react-native-elements';
+import { Button, Icon, Text } from 'react-native-elements';
 import Styles from './Styles';
 
 const ErrorMessageWithRetry = ({ onRetryPressed, errorMessage, retryButtonColor }) => (
   <View style={Styles.container}>
     <Text>{errorMessage}</Text>
-    <Button raised style={Styles.retryButton} onPress={onRetryPressed} title="Retry" icon={{ name: 'cached' }} backgroundColor={retryButtonColor} />
+    <Button
+      raised
+      style={Styles.retryButton}
+      onPress={onRetryPressed}
+      title="Retry"
+      icon={<Icon name="cached" />}
+      backgroundColor={retryButtonColor}
+    />
   </View>
 );
 

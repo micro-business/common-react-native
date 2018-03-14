@@ -6,7 +6,7 @@ import React, { Component } from 'react'; // eslint-disable-line import/no-extra
 import PropTypes from 'prop-types';
 import { ActivityIndicator, ScrollView, View, ImageBackground, Image } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 import { Col, Row } from 'react-native-easy-grid';
-import { Button, FormLabel, FormInput, FormValidationMessage, Text } from 'react-native-elements';
+import { Button, FormLabel, FormInput, FormValidationMessage, Icon, Text } from 'react-native-elements';
 import Styles from './Styles';
 
 class UserSignInSignUpPresentational extends Component {
@@ -169,7 +169,7 @@ class UserSignInSignUpPresentational extends Component {
   renderFacebookButton = () => (
     <Button
       title="Sign in with Facebook"
-      icon={{ name: 'facebook', type: 'material-community' }}
+      icon={<Icon name="facebook" type="material-community" />}
       backgroundColor="#3b5998"
       buttonStyle={Styles.button}
       onPress={this.props.onSignInWithFacebookClicked}
@@ -182,7 +182,7 @@ class UserSignInSignUpPresentational extends Component {
       onPress={this.onSignInClicked}
       buttonStyle={Styles.button}
       containerViewStyle={Styles.signInButtonContainerViewStyle}
-      icon={{ name: 'email', type: 'material-community' }}
+      icon={<Icon name="email" type="material-community" />}
       backgroundColor="#3b5998"
     />
   );
@@ -223,7 +223,7 @@ class UserSignInSignUpPresentational extends Component {
       onPress={this.onSignUpClicked}
       buttonStyle={Styles.button}
       containerViewStyle={Styles.signUpButtonContainerViewStyle}
-      icon={{ name: 'md-log-in', type: 'ionicon' }}
+      icon={<Icon name="md-log-in" type="ionicon" />}
       backgroundColor="#3b5998"
     />
   );
