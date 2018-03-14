@@ -1,6 +1,6 @@
 {
   "name": "@microbusiness/common-react-native",
-  "version": "1.1.52",
+  "version": "1.1.53",
   "description": "Micro Business Common React Native",
   "main": "./src/index.js",
   "scripts": {
@@ -43,7 +43,7 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-flowtype": "^2.46.1",
     "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-jest": "^21.14.0",
+    "eslint-plugin-jest": "^21.14.1",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-react-native": "^3.2.1",
@@ -58,7 +58,7 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-i18next": "^7.5.0",
-    "react-native": "^0.54.1",
+    "react-native": "^0.54.2",
     "react-native-easy-grid": "^0.1.17",
     "react-native-elements": "^0.19.0",
     "react-navigation": "1.0.0-beta.27",
