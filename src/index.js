@@ -11,3 +11,4 @@ export {
   TouchableItem,
   TouchableIcon,
 } from './sharedComponents';
+export ConfigReader from './ConfigReader';
