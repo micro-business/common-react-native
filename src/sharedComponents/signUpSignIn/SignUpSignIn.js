@@ -1,15 +1,15 @@
 // @flow
 
 import emailValidator from 'email-validator';
-import { Map } from 'immutable';
+import { Map, Set } from 'immutable';
 import React, { Component } from 'react'; // eslint-disable-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { ActivityIndicator, ScrollView, View, ImageBackground, Image } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import { ActivityIndicator, ScrollView, View, ImageBackground, Image, Picker } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
 import { Col, Row } from 'react-native-easy-grid';
 import { Button, FormLabel, FormInput, FormValidationMessage, Icon, Text } from 'react-native-elements';
 import Styles from './Styles';
 
-class UserSignInSignUpPresentational extends Component {
+class UserSignInSignUp extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -271,62 +271,69 @@ class UserSignInSignUpPresentational extends Component {
         </Row>
       );
     }
+
     return <View />;
   };
 
   renderSignUpView = () => {
+    const {
+      title,
+      titleTextColor,
+      logoImageUrl,
+      enableFacebookSignIn,
+      enableCreateAccount,
+      handleClickHyperLink,
+      termAndConditionUrl,
+      companyName,
+      environments,
+      currentEnvironment,
+      onEnvironmentSelected,
+      displayEnvironmentSelector,
+    } = this.props;
+    const style = titleTextColor ? { color: titleTextColor } : Styles.title;
+
     return (
       <ScrollView style={Styles.scrollView} keyboardShouldPersistTaps="always">
         <View style={Styles.topContainer}>
-          <Text h2 style={this.props.titleTextColor ? { color: this.props.titleTextColor } : Styles.title}>
-            {' '}
-            {this.props.title}
+          <Text h2 style={style}>
+            {title}
           </Text>
-          {this.props.logoImageUrl ? (
-            <Image
-              style={Styles.logo}
-              source={{
-                uri: this.props.logoImageUrl,
-              }}
-            />
-          ) : (
-            <View />
-          )}
+          {logoImageUrl ? <Image style={Styles.logo} source={{ uri: logoImageUrl }} /> : <View />}
         </View>
         <View>{this.renderSignUpOrSignInIsInProgressIndicator()}</View>
-        {this.props.enableFacebookSignIn ? <View>{this.renderFacebookButton()}</View> : <View />}
+        {enableFacebookSignIn ? <View>{this.renderFacebookButton()}</View> : <View />}
         <View>{this.renderSignInInputArea()}</View>
-        {this.props.enableCreateAccount ? <View>{this.renderSignUpInputArea()}</View> : <View />}
+        {enableCreateAccount ? <View>{this.renderSignUpInputArea()}</View> : <View />}
         <View style={Styles.termAndConditionContainter}>
-          <Text style={this.props.titleTextColor ? { color: this.props.titleTextColor } : Styles.title}>
-            By tapping Continue you agree to the following
-          </Text>
-          <Text onPress={() => this.props.handleClickHyperLink(this.props.termAndConditionUrl)} style={Styles.hyperLink}>
+          <Text style={style}>By tapping Continue you agree to the following</Text>
+          <Text onPress={() => handleClickHyperLink(termAndConditionUrl)} style={Styles.hyperLink}>
             Terms & Conditions
           </Text>
-          <Text style={this.props.titleTextColor ? { color: this.props.titleTextColor } : Styles.title}>
-            © Copyright 2017-{new Date().getFullYear()} {this.props.companyName}, all rights reserved.
+          <Text style={style}>
+            © Copyright 2017-{new Date().getFullYear()} {companyName}, all rights reserved.
           </Text>
         </View>
-        <View />
+        <View>
+          {displayEnvironmentSelector && (
+            <Picker style={style} selectedValue={currentEnvironment} onValueChange={onEnvironmentSelected}>
+              {environments.map(environment => <Picker.Item key={environment} label={environment} value={environment} />)}
+            </Picker>
+          )}
+        </View>
       </ScrollView>
     );
   };
 
   render = () => {
+    const { backgroundColor, backgroundImage, backgroundImageUrl } = this.props;
     const style = {
-      backgroundColor: this.props.backgroundColor,
+      backgroundColor,
       flex: 1,
     };
 
-    if (this.props.backgroundImage) {
+    if (backgroundImage) {
       return (
-        <ImageBackground
-          style={Styles.backgroundImage}
-          source={{
-            uri: this.props.backgroundImageUrl,
-          }}
-        >
+        <ImageBackground style={Styles.backgroundImage} source={{ uri: backgroundImageUrl }}>
           {this.renderSignUpView()}
         </ImageBackground>
       );
@@ -336,14 +343,13 @@ class UserSignInSignUpPresentational extends Component {
   };
 }
 
-UserSignInSignUpPresentational.propTypes = {
+UserSignInSignUp.propTypes = {
   onSignInWithFacebookClicked: PropTypes.func.isRequired,
   onSignInClicked: PropTypes.func.isRequired,
   onSignUpClicked: PropTypes.func.isRequired,
   signUpOrSignInIsInProgress: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   titleTextColor: PropTypes.string.isRequired,
-  backgroundImageUrl: PropTypes.string.isRequired,
   enableFacebookSignIn: PropTypes.bool.isRequired,
   enableCreateAccount: PropTypes.bool.isRequired,
   handleClickHyperLink: PropTypes.func.isRequired,
@@ -353,6 +359,15 @@ UserSignInSignUpPresentational.propTypes = {
   inputPlaceholderTextColor: PropTypes.string.isRequired,
   logoImageUrl: PropTypes.string.isRequired,
   backgroundColor: PropTypes.string.isRequired,
+  displayEnvironmentSelector: PropTypes.bool.isRequired,
+  currentEnvironment: PropTypes.string.isRequired,
+  environments: PropTypes.instanceOf(Set).isRequired,
+  onEnvironmentSelected: PropTypes.func.isRequired,
+  backgroundImageUrl: PropTypes.string,
 };
 
-export default UserSignInSignUpPresentational;
+UserSignInSignUp.defaultProps = {
+  backgroundImageUrl: null,
+};
+
+export default UserSignInSignUp;
