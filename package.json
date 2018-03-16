@@ -1,6 +1,6 @@
 {
   "name": "@microbusiness/common-react-native",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Micro Business Common React Native",
   "main": "./src/index.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "react-native-easy-grid": "^0.x",
     "react-native-elements": "^1.x",
     "react-native-restart": "^0.x",
-    "react-navigation": "1.5.7",
+    "react-navigation": "1.0.0-beta.27",
     "react-redux": "^5.x",
     "redux": "^3.x",
     "redux-saga": "^0.x"
