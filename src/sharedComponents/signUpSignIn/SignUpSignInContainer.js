@@ -18,13 +18,13 @@ class UserSignInSignUpContainer extends Component {
   };
 
   state = {
-    currentEnvironment: 'PROD',
+    currentEnvironment: ConfigReader.getDefaultEnvironment(),
   };
 
   componentDidMount = () => {
     AsyncStorage.getItem('@global:environment')
       .then(environment => {
-        this.setState({ currentEnvironment: environment ? environment : 'PROD' });
+        this.setState({ currentEnvironment: environment ? environment : ConfigReader.getDefaultEnvironment() });
       })
       .catch(() => {});
   };
