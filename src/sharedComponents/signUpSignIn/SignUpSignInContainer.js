@@ -12,7 +12,7 @@ import RNRestart from 'react-native-restart';
 import SignUpSignIn from './SignUpSignIn';
 import { ConfigReader } from '../../';
 
-class UserSignInSignUpContainer extends Component {
+class SignInSignUpContainer extends Component {
   static navigationOptions = {
     header: null,
   };
@@ -106,7 +106,7 @@ class UserSignInSignUpContainer extends Component {
   };
 }
 
-UserSignInSignUpContainer.propTypes = {
+SignInSignUpContainer.propTypes = {
   userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   signInStatus: PropTypes.number.isRequired,
   signUpStatus: PropTypes.number.isRequired,
@@ -124,7 +124,7 @@ UserSignInSignUpContainer.propTypes = {
   displayEnvironmentSelector: PropTypes.bool,
 };
 
-UserSignInSignUpContainer.defaultProps = {
+SignInSignUpContainer.defaultProps = {
   enableFacebookSignIn: true,
   enableCreateAccount: true,
   backgroundImageUrl: null,
@@ -158,4 +158,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserSignInSignUpContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInSignUpContainer);

@@ -4,12 +4,13 @@ import emailValidator from 'email-validator';
 import { Map, Set } from 'immutable';
 import React, { Component } from 'react'; // eslint-disable-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { ActivityIndicator, ScrollView, View, ImageBackground, Image, Picker } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import { ActivityIndicator, ScrollView, View, ImageBackground, Picker } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import FastImage from 'react-native-fast-image';
 import { Col, Row } from 'react-native-easy-grid';
-import { Button, FormLabel, FormInput, FormValidationMessage, Icon, Text } from 'react-native-elements';
+import { Button, Input, FormValidationMessage, Icon, Text } from 'react-native-elements';
 import Styles from './Styles';
 
-class UserSignInSignUp extends Component {
+class SignInSignUp extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -102,8 +103,10 @@ class UserSignInSignUp extends Component {
       if (emailAddress) {
         return emailValidator.validate(emailAddress) ? null : 'Email address is badly formatted.';
       }
+
       return 'Email address is required.';
     }
+
     return null;
   };
 
@@ -111,6 +114,7 @@ class UserSignInSignUp extends Component {
     if (this.state.data.get('signInPasswordChanged') || buttonPressed) {
       return this.state.data.get('signInPassword') ? null : 'Password is required.';
     }
+
     return null;
   };
 
@@ -121,8 +125,10 @@ class UserSignInSignUp extends Component {
       if (emailAddress) {
         return emailValidator.validate(emailAddress) ? null : 'Email address is badly formatted.';
       }
+
       return 'Email address is required.';
     }
+
     return null;
   };
 
@@ -137,8 +143,10 @@ class UserSignInSignUp extends Component {
       } else if (password.trim().length > 100) {
         return 'Password length cannot be longer than 100 characters.';
       }
+
       return null;
     }
+
     return null;
   };
 
@@ -154,8 +162,10 @@ class UserSignInSignUp extends Component {
       if (password.localeCompare(confirmPassword) === 0) {
         return null;
       }
+
       return 'Please re-enter your password.';
     }
+
     return null;
   };
 
@@ -176,90 +186,139 @@ class UserSignInSignUp extends Component {
     />
   );
 
-  renderSignInButton = () => (
-    <Button
-      title="Continue with Email"
-      onPress={this.onSignInClicked}
-      buttonStyle={Styles.button}
-      containerViewStyle={Styles.signInButtonContainerViewStyle}
-      icon={<Icon name="email" type="material-community" />}
-      backgroundColor="#3b5998"
-    />
-  );
+  renderSignInArea = () => {
+    const { errorMessageColor, inputPlaceholderTextColor, inputTextColor } = this.props;
+    const signInButtonPressed = this.state.data.get('signInButtonPressed');
+    const emailErrorMessage = this.getSignInEmailErrorMessage(signInButtonPressed);
+    const passwordErrorMessage = this.getSignInPasswordErrorMessage(signInButtonPressed);
 
-  renderSignInInputArea = () =>
-    this.state.data.get('signInInputAreaHidden') ? (
-      this.renderSignInButton()
-    ) : (
+    return (
       <View>
-        <FormLabel labelStyle={{ color: this.props.labelTextColor }}>Email</FormLabel>
-        <FormInput
-          onChangeText={this.onSignInEmailAddressChanged}
-          value={this.state.data.get('signInEmailAddress')}
-          placeholder="Please enter your email address"
-          keyboardType="email-address"
-          placeholderTextColor={this.props.inputPlaceholderTextColor}
-          inputStyle={{ color: this.props.inputPlaceholderTextColor }}
+        {!this.state.data.get('signInInputAreaHidden') && (
+          <View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
+              <View style={{ paddingLeft: 50, paddingRight: 50 }}>
+                <Input
+                  onChangeText={this.onSignInEmailAddressChanged}
+                  value={this.state.data.get('signInEmailAddress')}
+                  placeholder="Email"
+                  placeholderTextColor={inputPlaceholderTextColor}
+                  inputStyle={{ color: inputTextColor }}
+                  keyboardType="email-address"
+                  leftIcon={<Icon name="at" type="font-awesome" size={24} />}
+                  errorStyle={{ color: errorMessageColor }}
+                  displayError={emailErrorMessage ? true : false}
+                  errorMessage={emailErrorMessage}
+                />
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
+              <View style={{ paddingLeft: 50, paddingRight: 50 }}>
+                <Input
+                  onChangeText={this.onSignInPasswordChanged}
+                  value={this.state.data.get('signInPassword')}
+                  placeholderTextColor={inputPlaceholderTextColor}
+                  placeholder="Password"
+                  inputStyle={{ color: inputTextColor }}
+                  secureTextEntry
+                  leftIcon={<Icon name="unlock" type="font-awesome" size={24} />}
+                  errorStyle={{ color: errorMessageColor }}
+                  displayError={passwordErrorMessage ? true : false}
+                  errorMessage={passwordErrorMessage}
+                  style={{
+                    paddingLeft: 50,
+                    paddingRight: 50,
+                  }}
+                />
+              </View>
+            </View>
+          </View>
+        )}
+        <Button
+          title="Continue with Email"
+          onPress={this.onSignInClicked}
+          buttonStyle={Styles.button}
+          containerViewStyle={Styles.signInButtonContainerViewStyle}
+          icon={<Icon name="email" type="material-community" />}
+          backgroundColor="#3b5998"
         />
-        {this.renderErrorMessage(this.getSignInEmailErrorMessage(this.state.data.get('signInButtonPressed')))}
-        <FormLabel labelStyle={{ color: this.props.labelTextColor }}>Password</FormLabel>
-        <FormInput
-          onChangeText={this.onSignInPasswordChanged}
-          value={this.state.data.get('signInPassword')}
-          placeholder="Please enter your password"
-          secureTextEntry
-          placeholderTextColor={this.props.inputPlaceholderTextColor}
-          inputStyle={{ color: this.props.inputPlaceholderTextColor }}
-        />
-        {this.renderErrorMessage(this.getSignInPasswordErrorMessage(this.state.data.get('signInButtonPressed')))}
-        {this.renderSignInButton()}
       </View>
     );
+  };
 
-  renderSignUpButton = () => (
-    <Button
-      raised
-      title="Create Account"
-      onPress={this.onSignUpClicked}
-      buttonStyle={Styles.button}
-      containerViewStyle={Styles.signUpButtonContainerViewStyle}
-      icon={<Icon name="md-log-in" type="ionicon" />}
-      backgroundColor="#3b5998"
-    />
-  );
+  renderSignUpArea = () => {
+    const { errorMessageColor, inputPlaceholderTextColor, inputTextColor } = this.props;
+    const signUpButtonPressed = this.state.data.get('signUpButtonPressed');
+    const emailErrorMessage = this.getSignUpEmailErrorMessage(signUpButtonPressed);
+    const passwordErrorMessage = this.getSignUpPasswordErrorMessage(signUpButtonPressed);
+    const confirmPasswordErrorMessage = this.getSignUpConfirmPasswordErrorMessage(signUpButtonPressed);
 
-  renderSignUpInputArea = () =>
-    this.state.data.get('signUpInputAreaHidden') ? (
-      this.renderSignUpButton()
-    ) : (
+    return (
       <View>
-        <FormLabel>Email</FormLabel>
-        <FormInput
-          onChangeText={this.onSignUpEmailAddressChanged}
-          value={this.state.data.get('signUpEmailAddress')}
-          placeholder="Please enter your email address"
-          keyboardType="email-address"
+        {!this.state.data.get('signUpInputAreaHidden') && (
+          <View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
+              <View style={{ paddingLeft: 50, paddingRight: 50 }}>
+                <Input
+                  onChangeText={this.onSignUpEmailAddressChanged}
+                  value={this.state.data.get('signUpEmailAddress')}
+                  placeholder="Email"
+                  placeholderTextColor={inputPlaceholderTextColor}
+                  inputStyle={{ color: inputTextColor }}
+                  keyboardType="email-address"
+                  leftIcon={<Icon name="at" type="font-awesome" size={24} />}
+                  errorStyle={{ color: errorMessageColor }}
+                  displayError={emailErrorMessage ? true : false}
+                  errorMessage={emailErrorMessage}
+                />
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
+              <View style={{ paddingLeft: 50, paddingRight: 50 }}>
+                <Input
+                  onChangeText={this.onSignUpPasswordChanged}
+                  value={this.state.data.get('signUpPassword')}
+                  placeholder="Password"
+                  placeholderTextColor={inputPlaceholderTextColor}
+                  inputStyle={{ color: inputTextColor }}
+                  secureTextEntry
+                  leftIcon={<Icon name="unlock" type="font-awesome" size={24} />}
+                  errorStyle={{ color: errorMessageColor }}
+                  displayError={passwordErrorMessage ? true : false}
+                  errorMessage={passwordErrorMessage}
+                />
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
+              <View style={{ paddingLeft: 50, paddingRight: 50 }}>
+                <Input
+                  onChangeText={this.onSignUpConfirmPasswordChanged}
+                  value={this.state.data.get('signUpConfirmPassword')}
+                  placeholder="Re-enter Password"
+                  placeholderTextColor={inputPlaceholderTextColor}
+                  inputStyle={{ color: inputTextColor }}
+                  secureTextEntry
+                  leftIcon={<Icon name="unlock" type="font-awesome" size={24} />}
+                  errorStyle={{ color: errorMessageColor }}
+                  displayError={confirmPasswordErrorMessage ? true : false}
+                  errorMessage={confirmPasswordErrorMessage}
+                />
+              </View>
+            </View>
+          </View>
+        )}
+        <Button
+          raised
+          title="Create Account"
+          onPress={this.onSignUpClicked}
+          buttonStyle={Styles.button}
+          containerViewStyle={Styles.signUpButtonContainerViewStyle}
+          icon={<Icon name="md-log-in" type="ionicon" />}
+          backgroundColor="#3b5998"
         />
-        {this.renderErrorMessage(this.getSignUpEmailErrorMessage(this.state.data.get('signUpButtonPressed')))}
-        <FormLabel>Password</FormLabel>
-        <FormInput
-          onChangeText={this.onSignUpPasswordChanged}
-          value={this.state.data.get('signUpPassword')}
-          placeholder="Please enter your password"
-          secureTextEntry
-        />
-        {this.renderErrorMessage(this.getSignUpPasswordErrorMessage(this.state.data.get('signUpButtonPressed')))}
-        <FormLabel>Re-type Password</FormLabel>
-        <FormInput
-          onChangeText={this.onSignUpConfirmPasswordChanged}
-          value={this.state.data.get('signUpConfirmPassword')}
-          placeholder="Please enter your password again"
-          secureTextEntry
-        />
-        {this.renderErrorMessage(this.getSignUpConfirmPasswordErrorMessage(this.state.data.get('signUpButtonPressed')))}
-        {this.renderSignUpButton()}
       </View>
     );
+  };
 
   renderSignUpOrSignInIsInProgressIndicator = () => {
     if (this.props.signUpOrSignInIsInProgress) {
@@ -275,7 +334,7 @@ class UserSignInSignUp extends Component {
     return <View />;
   };
 
-  renderSignUpView = () => {
+  renderSignUpSignInView = () => {
     const {
       title,
       titleTextColor,
@@ -293,17 +352,17 @@ class UserSignInSignUp extends Component {
     const style = titleTextColor ? { color: titleTextColor } : Styles.title;
 
     return (
-      <ScrollView style={Styles.scrollView} keyboardShouldPersistTaps="always">
+      <ScrollView keyboardShouldPersistTaps="always">
         <View style={Styles.topContainer}>
           <Text h2 style={style}>
             {title}
           </Text>
-          {logoImageUrl ? <Image style={Styles.logo} source={{ uri: logoImageUrl }} /> : <View />}
+          {logoImageUrl ? <FastImage style={Styles.logo} source={{ uri: logoImageUrl }} /> : <View />}
         </View>
-        <View>{this.renderSignUpOrSignInIsInProgressIndicator()}</View>
-        {enableFacebookSignIn ? <View>{this.renderFacebookButton()}</View> : <View />}
-        <View>{this.renderSignInInputArea()}</View>
-        {enableCreateAccount ? <View>{this.renderSignUpInputArea()}</View> : <View />}
+        {this.renderSignUpOrSignInIsInProgressIndicator()}
+        {enableFacebookSignIn && this.renderFacebookButton()}
+        {this.renderSignInArea()}
+        {enableCreateAccount && this.renderSignUpArea()}
         <View style={Styles.termAndConditionContainter}>
           <Text style={style}>By tapping Continue you agree to the following</Text>
           <Text onPress={() => handleClickHyperLink(termAndConditionUrl)} style={Styles.hyperLink}>
@@ -313,13 +372,11 @@ class UserSignInSignUp extends Component {
             © Copyright 2017-{new Date().getFullYear()} {companyName}, all rights reserved.
           </Text>
         </View>
-        <View>
-          {displayEnvironmentSelector && (
-            <Picker style={style} selectedValue={currentEnvironment} onValueChange={onEnvironmentSelected}>
-              {environments.map(environment => <Picker.Item key={environment} label={environment} value={environment} />)}
-            </Picker>
-          )}
-        </View>
+        {displayEnvironmentSelector && (
+          <Picker style={style} selectedValue={currentEnvironment} onValueChange={onEnvironmentSelected}>
+            {environments.map(environment => <Picker.Item key={environment} label={environment} value={environment} />)}
+          </Picker>
+        )}
       </ScrollView>
     );
   };
@@ -334,16 +391,16 @@ class UserSignInSignUp extends Component {
     if (backgroundImage) {
       return (
         <ImageBackground style={Styles.backgroundImage} source={{ uri: backgroundImageUrl }}>
-          {this.renderSignUpView()}
+          {this.renderSignUpSignInView()}
         </ImageBackground>
       );
-    } else {
-      return <View style={style}>{this.renderSignUpView()}</View>;
     }
+
+    return <View style={style}>{this.renderSignUpSignInView()}</View>;
   };
 }
 
-UserSignInSignUp.propTypes = {
+SignInSignUp.propTypes = {
   onSignInWithFacebookClicked: PropTypes.func.isRequired,
   onSignInClicked: PropTypes.func.isRequired,
   onSignUpClicked: PropTypes.func.isRequired,
@@ -364,10 +421,14 @@ UserSignInSignUp.propTypes = {
   environments: PropTypes.instanceOf(Set).isRequired,
   onEnvironmentSelected: PropTypes.func.isRequired,
   backgroundImageUrl: PropTypes.string,
+  errorMessageColor: PropTypes.string,
+  inputTextColor: PropTypes.string,
 };
 
-UserSignInSignUp.defaultProps = {
+SignInSignUp.defaultProps = {
   backgroundImageUrl: null,
+  errorMessageColor: 'red',
+  inputTextColor: 'white',
 };
 
-export default UserSignInSignUp;
+export default SignInSignUp;
