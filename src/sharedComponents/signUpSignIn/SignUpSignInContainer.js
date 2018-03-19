@@ -2,15 +2,15 @@
 
 import * as userAccessActions from '@microbusiness/common-react/src/userAccess/Actions';
 import { UserAccessStatus } from '@microbusiness/common-react';
-import React, { Component } from 'react'; // eslint-disable-line import/no-extraneous-dependencies
-import { Alert, Linking } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
-import AsyncStorage from 'react-native/Libraries/Storage/AsyncStorage'; // eslint-disable-line import/no-extraneous-dependencies
+import React, { Component } from 'react';
+import { Alert, Linking } from 'react-native';
+import AsyncStorage from 'react-native/Libraries/Storage/AsyncStorage';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import RNRestart from 'react-native-restart';
 import SignUpSignIn from './SignUpSignIn';
-import { ConfigReader } from '../../';
+import { ConfigReader } from '../..';
 
 class SignInSignUpContainer extends Component {
   static navigationOptions = {
@@ -30,15 +30,21 @@ class SignInSignUpContainer extends Component {
   };
 
   handleSignInWithFacebookClicked = () => {
-    this.props.userAccessActions.signInWithFacebook('public_profile,email', 'individual');
+    const { userAccessActions } = this.props;
+
+    userAccessActions.signInWithFacebook('public_profile,email', 'individual');
   };
 
   handleSignInClicked = (emailAddress, password) => {
-    this.props.userAccessActions.signInWithUsernameAndPassword(emailAddress, password);
+    const { userAccessActions } = this.props;
+
+    userAccessActions.signInWithUsernameAndPassword(emailAddress, password);
   };
 
   handleSignUpClicked = (emailAddress, password) => {
-    this.props.userAccessActions.signUpWithUsernameAndPassword(emailAddress, password, emailAddress, 'individual');
+    const { userAccessActions } = this.props;
+
+    userAccessActions.signUpWithUsernameAndPassword(emailAddress, password, emailAddress, 'individual');
   };
 
   handleClickHyperLink = url => {
@@ -78,6 +84,7 @@ class SignInSignUpContainer extends Component {
       backgroundColor,
       displayEnvironmentSelector,
     } = this.props;
+    const { currentEnvironment } = this.state;
 
     return (
       <SignUpSignIn
@@ -97,7 +104,7 @@ class SignInSignUpContainer extends Component {
         inputPlaceholderTextColor={inputPlaceholderTextColor}
         logoImageUrl={logoImageUrl}
         backgroundColor={backgroundColor}
-        currentEnvironment={this.state.currentEnvironment}
+        currentEnvironment={currentEnvironment}
         environments={ConfigReader.getEnvironments()}
         onEnvironmentSelected={this.handleEnvironmentSelected}
         displayEnvironmentSelector={displayEnvironmentSelector}
@@ -158,4 +165,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignInSignUpContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SignInSignUpContainer);

@@ -1,19 +1,13 @@
 // @flow
 
-import React, { Component } from 'react'; // eslint-disable-line import/no-extraneous-dependencies
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import { View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import debounce from 'lodash.debounce';
 import Styles from './Styles';
 
 class SearchBarWithDelay extends Component {
-  static getDerivedStateFromProps(nextProps) {
-    return {
-      searchKeyword: nextProps.searchKeyword,
-    };
-  }
-
   constructor(props, context) {
     super(props, context);
 
@@ -21,7 +15,15 @@ class SearchBarWithDelay extends Component {
       searchKeyword: props.searchKeyword,
     };
 
-    this.onSearchKeywordChanged = debounce(this.props.onSearchKeywordChanged, 300);
+    const { onSearchKeywordChanged } = props;
+
+    this.onSearchKeywordChanged = debounce(onSearchKeywordChanged, 300);
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      searchKeyword: nextProps.searchKeyword,
+    };
   }
 
   searchKeywordChanged = searchKeyword => {
@@ -33,23 +35,28 @@ class SearchBarWithDelay extends Component {
     );
   };
 
-  render = () => (
-    <View style={Styles.container}>
-      <SearchBar
-        clearIcon={{ color: this.props.clearIconColor }}
-        lightTheme
-        noIcon
-        autoFocus={this.props.autoFocus}
-        containerStyle={Styles.search}
-        inputStyle={Styles.searchInput}
-        placeholder="Search..."
-        textInputRef="textInputRef"
-        placeholderTextColor={this.props.placeholderTextColor}
-        value={this.state.searchKeyword}
-        onChangeText={this.searchKeywordChanged}
-      />
-    </View>
-  );
+  render = () => {
+    const { clearIconColor, autoFocus, placeholderTextColor } = this.props;
+    const { searchKeyword } = this.state;
+
+    return (
+      <View style={Styles.container}>
+        <SearchBar
+          clearIcon={{ color: clearIconColor }}
+          lightTheme
+          noIcon
+          autoFocus={autoFocus}
+          containerStyle={Styles.search}
+          inputStyle={Styles.searchInput}
+          placeholder="Search..."
+          textInputRef="textInputRef"
+          placeholderTextColor={placeholderTextColor}
+          value={searchKeyword}
+          onChangeText={this.searchKeywordChanged}
+        />
+      </View>
+    );
+  };
 }
 
 SearchBarWithDelay.propTypes = {

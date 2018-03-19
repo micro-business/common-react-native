@@ -2,7 +2,7 @@
 
 import { Map } from 'immutable';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { NetInfo } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import { NetInfo } from 'react-native';
 import ActionTypes from './ActionTypes';
 import * as Actions from './Actions';
 

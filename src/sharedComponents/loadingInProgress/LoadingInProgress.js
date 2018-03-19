@@ -1,14 +1,16 @@
 // @flow
 
-import React from 'react'; // eslint-disable-line import/no-extraneous-dependencies
+import React from 'react';
 import PropTypes from 'prop-types';
-import { View, ActivityIndicator } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import { View, ActivityIndicator } from 'react-native';
 import { Text } from 'react-native-elements';
 import Styles from './Styles';
 
 const LoadingInProgress = ({ messageToDisplay, activityIndicatorColor }) => (
   <View style={Styles.container}>
-    <Text>{messageToDisplay}</Text>
+    <Text>
+      {messageToDisplay}
+    </Text>
     <ActivityIndicator size="large" color={activityIndicatorColor} style={Styles.activityIndicator} />
   </View>
 );

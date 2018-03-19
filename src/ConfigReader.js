@@ -22,4 +22,6 @@ export default class ConfigReader {
   getPrefixedValue = key => Config[this.environment + '_' + key];
 
   getGraphQLEndpointUrl = () => this.getPrefixedValue('GRAPHQL_ENDPOINT_URL');
+
+  getGoogleAnalyticsTrackingId = () => this.getPrefixedValue('GOOGLE_ANALYTICS_TRACKING_ID');
 }

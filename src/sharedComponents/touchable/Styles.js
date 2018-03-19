@@ -1,6 +1,6 @@
 // @flow
 
-import { StyleSheet } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import { StyleSheet } from 'react-native';
 import Sizes from '../../styles/DefaultStyles';
 
 export default StyleSheet.create({

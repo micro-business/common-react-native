@@ -1,10 +1,10 @@
 // @flow
 
-import React from 'react'; // eslint-disable-line import/no-extraneous-dependencies
+import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { TouchableItem } from '.';
+import TouchableItem from 'react-navigation/src/views/TouchableItem';
 import Styles from './Styles';
 
 const TouchableIcon = ({ onPress, iconName, iconType, iconColor, iconDisabledColor, disabled, iconSize, iconContainerStyle, pressColor }) => (

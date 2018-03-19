@@ -1,7 +1,7 @@
 // @flow
 
-import React from 'react'; // eslint-disable-line import/no-extraneous-dependencies
-import { View } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import React from 'react';
+import { View } from 'react-native';
 import Styles from './Styles';
 
 const ListItemSeparator = () => <View style={Styles.itemSeparator} />;

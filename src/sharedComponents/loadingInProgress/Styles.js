@@ -1,6 +1,6 @@
 // @flow
 
-import { StyleSheet } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {

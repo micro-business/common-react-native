@@ -2,9 +2,9 @@
 
 import emailValidator from 'email-validator';
 import { Map, Set } from 'immutable';
-import React, { Component } from 'react'; // eslint-disable-line import/no-extraneous-dependencies
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ActivityIndicator, ScrollView, View, ImageBackground, Picker } from 'react-native'; // eslint-disable-line import/no-extraneous-dependencies
+import { ActivityIndicator, ScrollView, View, ImageBackground, Picker } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Col, Row } from 'react-native-easy-grid';
 import { Button, Input, FormValidationMessage, Icon, Text } from 'react-native-elements';
@@ -35,70 +35,60 @@ class SignInSignUp extends Component {
   }
 
   onSignInEmailAddressChanged = text => {
-    this.setState({
-      data: this.state.data.set('signInEmailAddress', text.toLowerCase()).set('signInEmailAddressChanged', true),
-    });
+    this.setState(({ data: prevData }) => ({ data: prevData.set('signInEmailAddress', text.toLowerCase()).set('signInEmailAddressChanged', true) }));
   };
 
   onSignInPasswordChanged = text => {
-    this.setState({
-      data: this.state.data.set('signInPassword', text).set('signInPasswordChanged', true),
-    });
+    this.setState(({ data: prevData }) => ({ data: prevData.set('signInPassword', text).set('signInPasswordChanged', true) }));
   };
 
   onSignUpEmailAddressChanged = text => {
-    this.setState({
-      data: this.state.data.set('signUpEmailAddress', text.toLowerCase()).set('signUpEmailAddressChanged', true),
-    });
+    this.setState(({ data: prevData }) => ({ data: prevData.set('signUpEmailAddress', text.toLowerCase()).set('signUpEmailAddressChanged', true) }));
   };
 
   onSignUpPasswordChanged = text => {
-    this.setState({
-      data: this.state.data.set('signUpPassword', text).set('signUpPasswordChanged', true),
-    });
+    this.setState(({ data: prevData }) => ({ data: prevData.set('signUpPassword', text).set('signUpPasswordChanged', true) }));
   };
 
   onSignUpConfirmPasswordChanged = text => {
-    this.setState({
-      data: this.state.data.set('signUpConfirmPassword', text).set('signUpConfirmPasswordChanged', true),
-    });
+    this.setState(({ data: prevData }) => ({ data: prevData.set('signUpConfirmPassword', text).set('signUpConfirmPasswordChanged', true) }));
   };
 
   onSignInClicked = () => {
-    if (this.state.data.get('signInInputAreaHidden')) {
-      this.setState({
-        data: this.state.data.set('signInInputAreaHidden', false).set('signUpInputAreaHidden', true),
-      });
+    const { data } = this.state;
+    const { onSignInClicked } = this.props;
+
+    if (data.get('signInInputAreaHidden')) {
+      this.setState(({ data: prevData }) => ({ data: prevData.set('signInInputAreaHidden', false).set('signUpInputAreaHidden', true) }));
     } else {
-      this.setState({
-        data: this.state.data.set('signInButtonPressed', true),
-      });
+      this.setState(({ data: prevData }) => ({ data: prevData.set('signInButtonPressed', true) }));
 
       if (!this.getSignInEmailErrorMessage(true) && !this.getSignInPasswordErrorMessage(true)) {
-        this.props.onSignInClicked(this.state.data.get('signInEmailAddress'), this.state.data.get('signInPassword'));
+        onSignInClicked(data.get('signInEmailAddress'), data.get('signInPassword'));
       }
     }
   };
 
   onSignUpClicked = () => {
-    if (this.state.data.get('signUpInputAreaHidden')) {
-      this.setState({
-        data: this.state.data.set('signInInputAreaHidden', true).set('signUpInputAreaHidden', false),
-      });
+    const { data } = this.state;
+    const { onSignUpClicked } = this.props;
+
+    if (data.get('signUpInputAreaHidden')) {
+      this.setState(({ data: prevData }) => ({ data: prevData.set('signInInputAreaHidden', true).set('signUpInputAreaHidden', false) }));
     } else {
-      this.setState({
-        data: this.state.data.set('signUpButtonPressed', true),
-      });
+      this.setState(({ data: prevData }) => ({ data: prevData.set('signUpButtonPressed', true) }));
 
       if (!this.getSignUpEmailErrorMessage(true) && !this.getSignUpPasswordErrorMessage(true) && !this.getSignUpConfirmPasswordErrorMessage(true)) {
-        this.props.onSignUpClicked(this.state.data.get('signUpEmailAddress'), this.state.data.get('signUpPassword'));
+        onSignUpClicked(data.get('signUpEmailAddress'), data.get('signUpPassword'));
       }
     }
   };
 
   getSignInEmailErrorMessage = buttonPressed => {
-    if (this.state.data.get('signInEmailAddressChanged') || buttonPressed) {
-      const emailAddress = this.state.data.get('signInEmailAddress');
+    const { data } = this.state;
+
+    if (data.get('signInEmailAddressChanged') || buttonPressed) {
+      const emailAddress = data.get('signInEmailAddress');
 
       if (emailAddress) {
         return emailValidator.validate(emailAddress) ? null : 'Email address is badly formatted.';
@@ -111,16 +101,20 @@ class SignInSignUp extends Component {
   };
 
   getSignInPasswordErrorMessage = buttonPressed => {
-    if (this.state.data.get('signInPasswordChanged') || buttonPressed) {
-      return this.state.data.get('signInPassword') ? null : 'Password is required.';
+    const { data } = this.state;
+
+    if (data.get('signInPasswordChanged') || buttonPressed) {
+      return data.get('signInPassword') ? null : 'Password is required.';
     }
 
     return null;
   };
 
   getSignUpEmailErrorMessage = buttonPressed => {
-    if (this.state.data.get('signUpEmailAddressChanged') || buttonPressed) {
-      const emailAddress = this.state.data.get('signUpEmailAddress');
+    const { data } = this.state;
+
+    if (data.get('signUpEmailAddressChanged') || buttonPressed) {
+      const emailAddress = data.get('signUpEmailAddress');
 
       if (emailAddress) {
         return emailValidator.validate(emailAddress) ? null : 'Email address is badly formatted.';
@@ -133,8 +127,10 @@ class SignInSignUp extends Component {
   };
 
   getSignUpPasswordErrorMessage = buttonPressed => {
-    if (this.state.data.get('signUpPasswordChanged') || buttonPressed) {
-      const password = this.state.data.get('signUpPassword');
+    const { data } = this.state;
+
+    if (data.get('signUpPasswordChanged') || buttonPressed) {
+      const password = data.get('signUpPassword');
 
       if (!password || password.trim().length === 0) {
         return 'Password is required.';
@@ -151,13 +147,15 @@ class SignInSignUp extends Component {
   };
 
   getSignUpConfirmPasswordErrorMessage = buttonPressed => {
-    if (this.state.data.get('signUpConfirmPasswordChanged') || buttonPressed) {
+    const { data } = this.state;
+
+    if (data.get('signUpConfirmPasswordChanged') || buttonPressed) {
       if (this.getSignUpPasswordErrorMessage(buttonPressed)) {
         return null;
       }
 
-      const password = this.state.data.get('signUpPassword');
-      const confirmPassword = this.state.data.get('signUpConfirmPassword');
+      const password = data.get('signUpPassword');
+      const confirmPassword = data.get('signUpConfirmPassword');
 
       if (password.localeCompare(confirmPassword) === 0) {
         return null;
@@ -171,66 +169,72 @@ class SignInSignUp extends Component {
 
   renderErrorMessage = errorMessage => {
     if (errorMessage) {
-      return <FormValidationMessage> {errorMessage}</FormValidationMessage>;
+      return (
+        <FormValidationMessage> 
+          {' '}
+          {errorMessage}
+        </FormValidationMessage>
+      );
     }
     return <View />;
   };
 
-  renderFacebookButton = () => (
-    <Button
-      title="Sign in with Facebook"
-      icon={<Icon name="facebook" type="material-community" />}
-      backgroundColor="#3b5998"
-      buttonStyle={Styles.button}
-      onPress={this.props.onSignInWithFacebookClicked}
-    />
-  );
+  renderFacebookButton = () => {
+    const { onSignInWithFacebookClicked } = this.props;
+
+    return (
+      <Button
+        title="Sign in with Facebook"
+        icon={<Icon name="facebook" type="material-community" />}
+        backgroundColor="#3b5998"
+        buttonStyle={Styles.button}
+        onPress={onSignInWithFacebookClicked}
+      />
+    );
+  };
 
   renderSignInArea = () => {
     const { errorMessageColor, inputPlaceholderTextColor, inputTextColor } = this.props;
-    const signInButtonPressed = this.state.data.get('signInButtonPressed');
+    const { data } = this.state;
+    const signInButtonPressed = data.get('signInButtonPressed');
     const emailErrorMessage = this.getSignInEmailErrorMessage(signInButtonPressed);
     const passwordErrorMessage = this.getSignInPasswordErrorMessage(signInButtonPressed);
 
     return (
       <View>
-        {!this.state.data.get('signInInputAreaHidden') && (
+        {!data.get('signInInputAreaHidden') && (
           <View>
             <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
-              <View style={{ paddingLeft: 50, paddingRight: 50 }}>
-                <Input
-                  onChangeText={this.onSignInEmailAddressChanged}
-                  value={this.state.data.get('signInEmailAddress')}
-                  placeholder="Email"
-                  placeholderTextColor={inputPlaceholderTextColor}
-                  inputStyle={{ color: inputTextColor }}
-                  keyboardType="email-address"
-                  leftIcon={<Icon name="at" type="font-awesome" size={24} />}
-                  errorStyle={{ color: errorMessageColor }}
-                  displayError={emailErrorMessage ? true : false}
-                  errorMessage={emailErrorMessage}
-                />
-              </View>
+              <Input
+                onChangeText={this.onSignInEmailAddressChanged}
+                value={data.get('signInEmailAddress')}
+                placeholder="Email"
+                placeholderTextColor={inputPlaceholderTextColor}
+                inputStyle={{ color: inputTextColor }}
+                keyboardType="email-address"
+                leftIcon={<Icon name="at" type="font-awesome" size={24} />}
+                errorStyle={{ color: errorMessageColor }}
+                displayError={emailErrorMessage ? true : false}
+                errorMessage={emailErrorMessage}
+              />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
-              <View style={{ paddingLeft: 50, paddingRight: 50 }}>
-                <Input
-                  onChangeText={this.onSignInPasswordChanged}
-                  value={this.state.data.get('signInPassword')}
-                  placeholderTextColor={inputPlaceholderTextColor}
-                  placeholder="Password"
-                  inputStyle={{ color: inputTextColor }}
-                  secureTextEntry
-                  leftIcon={<Icon name="unlock" type="font-awesome" size={24} />}
-                  errorStyle={{ color: errorMessageColor }}
-                  displayError={passwordErrorMessage ? true : false}
-                  errorMessage={passwordErrorMessage}
-                  style={{
-                    paddingLeft: 50,
-                    paddingRight: 50,
-                  }}
-                />
-              </View>
+              <Input
+                onChangeText={this.onSignInPasswordChanged}
+                value={data.get('signInPassword')}
+                placeholderTextColor={inputPlaceholderTextColor}
+                placeholder="Password"
+                inputStyle={{ color: inputTextColor }}
+                secureTextEntry
+                leftIcon={<Icon name="unlock" type="font-awesome" size={24} />}
+                errorStyle={{ color: errorMessageColor }}
+                displayError={passwordErrorMessage ? true : false}
+                errorMessage={passwordErrorMessage}
+                style={{
+                  paddingLeft: 50,
+                  paddingRight: 50,
+                }}
+              />
             </View>
           </View>
         )}
@@ -248,62 +252,57 @@ class SignInSignUp extends Component {
 
   renderSignUpArea = () => {
     const { errorMessageColor, inputPlaceholderTextColor, inputTextColor } = this.props;
-    const signUpButtonPressed = this.state.data.get('signUpButtonPressed');
+    const { data } = this.state;
+    const signUpButtonPressed = data.get('signUpButtonPressed');
     const emailErrorMessage = this.getSignUpEmailErrorMessage(signUpButtonPressed);
     const passwordErrorMessage = this.getSignUpPasswordErrorMessage(signUpButtonPressed);
     const confirmPasswordErrorMessage = this.getSignUpConfirmPasswordErrorMessage(signUpButtonPressed);
 
     return (
       <View>
-        {!this.state.data.get('signUpInputAreaHidden') && (
+        {!data.get('signUpInputAreaHidden') && (
           <View>
             <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
-              <View style={{ paddingLeft: 50, paddingRight: 50 }}>
-                <Input
-                  onChangeText={this.onSignUpEmailAddressChanged}
-                  value={this.state.data.get('signUpEmailAddress')}
-                  placeholder="Email"
-                  placeholderTextColor={inputPlaceholderTextColor}
-                  inputStyle={{ color: inputTextColor }}
-                  keyboardType="email-address"
-                  leftIcon={<Icon name="at" type="font-awesome" size={24} />}
-                  errorStyle={{ color: errorMessageColor }}
-                  displayError={emailErrorMessage ? true : false}
-                  errorMessage={emailErrorMessage}
-                />
-              </View>
+              <Input
+                onChangeText={this.onSignUpEmailAddressChanged}
+                value={data.get('signUpEmailAddress')}
+                placeholder="Email"
+                placeholderTextColor={inputPlaceholderTextColor}
+                inputStyle={{ color: inputTextColor }}
+                keyboardType="email-address"
+                leftIcon={<Icon name="at" type="font-awesome" size={24} />}
+                errorStyle={{ color: errorMessageColor }}
+                displayError={emailErrorMessage ? true : false}
+                errorMessage={emailErrorMessage}
+              />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
-              <View style={{ paddingLeft: 50, paddingRight: 50 }}>
-                <Input
-                  onChangeText={this.onSignUpPasswordChanged}
-                  value={this.state.data.get('signUpPassword')}
-                  placeholder="Password"
-                  placeholderTextColor={inputPlaceholderTextColor}
-                  inputStyle={{ color: inputTextColor }}
-                  secureTextEntry
-                  leftIcon={<Icon name="unlock" type="font-awesome" size={24} />}
-                  errorStyle={{ color: errorMessageColor }}
-                  displayError={passwordErrorMessage ? true : false}
-                  errorMessage={passwordErrorMessage}
-                />
-              </View>
+              <Input
+                onChangeText={this.onSignUpPasswordChanged}
+                value={data.get('signUpPassword')}
+                placeholder="Password"
+                placeholderTextColor={inputPlaceholderTextColor}
+                inputStyle={{ color: inputTextColor }}
+                secureTextEntry
+                leftIcon={<Icon name="unlock" type="font-awesome" size={24} />}
+                errorStyle={{ color: errorMessageColor }}
+                displayError={passwordErrorMessage ? true : false}
+                errorMessage={passwordErrorMessage}
+              />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
-              <View style={{ paddingLeft: 50, paddingRight: 50 }}>
-                <Input
-                  onChangeText={this.onSignUpConfirmPasswordChanged}
-                  value={this.state.data.get('signUpConfirmPassword')}
-                  placeholder="Re-enter Password"
-                  placeholderTextColor={inputPlaceholderTextColor}
-                  inputStyle={{ color: inputTextColor }}
-                  secureTextEntry
-                  leftIcon={<Icon name="unlock" type="font-awesome" size={24} />}
-                  errorStyle={{ color: errorMessageColor }}
-                  displayError={confirmPasswordErrorMessage ? true : false}
-                  errorMessage={confirmPasswordErrorMessage}
-                />
-              </View>
+              <Input
+                onChangeText={this.onSignUpConfirmPasswordChanged}
+                value={data.get('signUpConfirmPassword')}
+                placeholder="Re-enter Password"
+                placeholderTextColor={inputPlaceholderTextColor}
+                inputStyle={{ color: inputTextColor }}
+                secureTextEntry
+                leftIcon={<Icon name="unlock" type="font-awesome" size={24} />}
+                errorStyle={{ color: errorMessageColor }}
+                displayError={confirmPasswordErrorMessage ? true : false}
+                errorMessage={confirmPasswordErrorMessage}
+              />
             </View>
           </View>
         )}
@@ -321,11 +320,13 @@ class SignInSignUp extends Component {
   };
 
   renderSignUpOrSignInIsInProgressIndicator = () => {
-    if (this.props.signUpOrSignInIsInProgress) {
+    const { signUpOrSignInIsInProgress } = this.props;
+
+    if (signUpOrSignInIsInProgress) {
       return (
         <Row>
           <Col>
-            <ActivityIndicator animating={this.props.signUpOrSignInIsInProgress} size="large" color="#3b5998" style={Styles.activityIndicator} />
+            <ActivityIndicator animating={signUpOrSignInIsInProgress} size="large" color="#3b5998" style={Styles.activityIndicator} />
           </Col>
         </Row>
       );
@@ -364,12 +365,18 @@ class SignInSignUp extends Component {
         {this.renderSignInArea()}
         {enableCreateAccount && this.renderSignUpArea()}
         <View style={Styles.termAndConditionContainter}>
-          <Text style={style}>By tapping Continue you agree to the following</Text>
+          <Text style={style}>
+By tapping Continue you agree to the following
+          </Text>
           <Text onPress={() => handleClickHyperLink(termAndConditionUrl)} style={Styles.hyperLink}>
             Terms & Conditions
           </Text>
           <Text style={style}>
-            © Copyright 2017-{new Date().getFullYear()} {companyName}, all rights reserved.
+            © Copyright 2017-
+            {new Date().getFullYear()} 
+            {' '}
+            {companyName}
+            , all rights reserved.
           </Text>
         </View>
         {displayEnvironmentSelector && (
@@ -396,7 +403,11 @@ class SignInSignUp extends Component {
       );
     }
 
-    return <View style={style}>{this.renderSignUpSignInView()}</View>;
+    return (
+      <View style={style}>
+        {this.renderSignUpSignInView()}
+      </View>
+    );
   };
 }
 

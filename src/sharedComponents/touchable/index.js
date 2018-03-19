@@ -1,4 +1,4 @@
 // @flow
 
-export TouchableItem from 'react-navigation/src/views/TouchableItem'; // eslint-disable-line import/no-extraneous-dependencies
+export TouchableItem from 'react-navigation/src/views/TouchableItem';
 export TouchableIcon from './TouchableIcon';
